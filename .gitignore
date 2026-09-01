@@ -1,0 +1,22 @@
+# Python files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jupyter files
+.ipynb_checkpoints/
+
+# Private configuration
+.env
+*.key
+
+# Complete datasets
+data/raw/
+data/processed/
+*.pcap
+*.pcapng
+
+# Computer files
+.DS_Store
+Thumbs.db
