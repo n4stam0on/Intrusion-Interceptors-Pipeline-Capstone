@@ -17,4 +17,3 @@ Our team plans to reproduce a machine-learning intrusion detection experiment us
 - Reproduction Target Confirmed: 99.16% Random Forest Multiclass Accuracy
 - MQTT-IoT-IDS2020 Bi-flow Dataset Selected
 - Dataset Loading and Verification In Progress
-- Leakage-Safe Dataset Preprocessing and Train/Test Preparation In Progress
