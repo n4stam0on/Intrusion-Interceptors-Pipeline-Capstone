@@ -12,5 +12,8 @@ Our team plans to reproduce a machine-learning intrusion detection experiment us
 - Collaborators Added
 - GitHub Project Board Created
 - Wiki Home Page Created
-- Research Claim Verification Pending
-- Dataset-Loading Test Pending
+- Capstone Proposal Completed and Submitted
+- XMID-MQTT Paper Selected
+- Reproduction Target Confirmed: 99.16% Random Forest Multiclass Accuracy
+- MQTT-IoT-IDS2020 Bi-flow Dataset Selected
+- Dataset Loading and Verification In Progress
