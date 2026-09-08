@@ -9,6 +9,7 @@ This document tracks individual contributions made by each member of the Intrusi
 | 9/8/26 | 10:48 AM | Reviewed and closed the completed paper and numerical claim selection task. Confirmed the finalized XMID-MQTT paper and 99.16% Random Forest multiclass accuracy reproduction target documented in the submitted proposal. | [Issue #3](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/3) |
 | 9/8/26 | 10:57AM | Reviewed and closed the completed capstone proposal task. Confirmed the proposal was finalized, reviewed, signed by all team members, and submitted with the team's finalized project plan. | [Issue #4](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/4) |
 | 9/8/26 | 11:08AM | Reviewed and closed the separate clean-checkout reproducibility task after identifying that its verification requirements are already covered by the project environment setup task. | [Issue #11](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/11) |
+| 9/8/26 | 11:40AM | Updated the main project README to reflect the finalized XMID-MQTT paper, MQTT-IoT-IDS2020 Bi-flow dataset, 99.16% Random Forest reproduction target, completed proposal, and current dataset verification status. | README update |
 
 
 ## Kien Nguyen
