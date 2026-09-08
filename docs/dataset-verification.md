@@ -2,24 +2,30 @@
 
 Owner: `mvpmvpmvpmvpmvp`
 
-Status: **Blocked until the team confirms one dataset and one research paper.**
+Status: **Dataset selected; real-data loading evidence is pending.**
 
-The repository currently names UNSW-NB15, while the team discussion names
-MQTT-IoT-IDS2020. This page must describe the dataset used by the
-instructor-approved paper.
+The team selected the MQTT-IoT-IDS2020 Bi-flow representation and the
+XMID-MQTT paper on September 8, 2026. Before the numerical target is frozen,
+the team must resolve the model/metric discrepancy recorded below.
 
 ## Decision Record
 
-- Final dataset:
-- Date approved by team:
-- Approved research paper:
-- Exact result to reproduce:
-- Paper table or figure:
+- Final dataset: MQTT-IoT-IDS2020, bidirectional-flow (Bi-flow) representation
+- Date confirmed by team: September 8, 2026
+- Selected research paper: *XMID-MQTT: explaining machine learning-based intrusion detection system for MQTT protocol in IoT environment*
+- Paper DOI: https://doi.org/10.1007/s10207-025-01036-w
+- Numerical target: **Team confirmation required.** The team message names
+  99.16% Random Forest accuracy, but the paper reports 99.99% Random Forest
+  Bi-flow accuracy in Table 2 and 99.16% Linear SVM Bi-flow accuracy in Table 3.
+- Paper table or figure: Table 2 (Random Forest) or Table 3 (Linear SVM), after
+  the team confirms which result it intends to reproduce
 
 ## Official Dataset Source
 
-- Publisher/maintainer:
-- Official URL:
+- Publisher/maintainer: IEEE DataPort; dataset record maintained by the
+  University of Strathclyde
+- Official URL: https://pureportal.strath.ac.uk/en/datasets/mqtt-iot-ids2020-mqtt-internet-of-things-intrusion-detection-data/
+- Dataset DOI: https://doi.org/10.21227/bhxy-ep04
 - Licence or usage terms:
 - Download date:
 - Download size:
@@ -31,7 +37,7 @@ available.
 ## Selected Data Representation
 
 - CSV filename(s):
-- Feature level (packet, unidirectional flow, or bidirectional flow):
+- Feature level (packet, unidirectional flow, or bidirectional flow): Bidirectional flow
 - Target/label column:
 - Classification task (binary or multiclass):
 - Reason this representation matches the paper:

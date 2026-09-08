@@ -1,6 +1,13 @@
 # Dataset Information
 
-This project will use the prepared CSV version of the UNSW-NB15 dataset
+This project will use the bidirectional-flow (Bi-flow) CSV representation of
+the MQTT-IoT-IDS2020 dataset.
+
+The official dataset record is maintained by the University of Strathclyde and
+points to the IEEE DataPort deposit:
+
+- Dataset record: https://pureportal.strath.ac.uk/en/datasets/mqtt-iot-ids2020-mqtt-internet-of-things-intrusion-detection-data/
+- Dataset DOI: https://doi.org/10.21227/bhxy-ep04
 
 ## Data Storage
 
@@ -10,9 +17,8 @@ A small sample may be added to the repository after the team verifies the datase
 
 ## Information to Confirm
 
-- Official Dataset Source
 - Dataset License Or Usage Terms
 - Download Size
-- Training and Testing Filenames
+- Exact Bi-flow CSV Filename(s)
 - Number of Rows and Columns
 - Target Column and Label Meanings
