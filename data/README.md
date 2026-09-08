@@ -21,6 +21,14 @@ The dataset authors' companion code expects these extracted files:
 
 Companion code: https://github.com/AbertayMachineLearningGroup/MQTT_ML
 
+The team also provided this Kaggle replication for local testing:
+
+- https://www.kaggle.com/datasets/ogunyemioluwapelumi/mqtt-iot-ids2020-private
+
+Kaggle reports the replication's licence as unknown. Use the official IEEE
+DataPort record for provenance and licensing, and verify the replication
+against the official archive before final experiments.
+
 ## Data Storage
 
 The complete dataset will not be uploaded to GitHub because of its size. Team members will store the complete CSV files locally inside a `data/raw` folder.
