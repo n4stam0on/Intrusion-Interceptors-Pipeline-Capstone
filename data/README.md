@@ -8,6 +8,18 @@ points to the IEEE DataPort deposit:
 
 - Dataset record: https://pureportal.strath.ac.uk/en/datasets/mqtt-iot-ids2020-mqtt-internet-of-things-intrusion-detection-data/
 - Dataset DOI: https://doi.org/10.21227/bhxy-ep04
+- Licence: Creative Commons Attribution 4.0 International (CC BY 4.0)
+- Selected download: `biflow_features.zip` (14.56 MB)
+
+The dataset authors' companion code expects these extracted files:
+
+- `biflow_normal.csv`
+- `biflow_scan_A.csv`
+- `biflow_scan_sU.csv`
+- `biflow_sparta.csv`
+- `biflow_mqtt_bruteforce.csv`
+
+Companion code: https://github.com/AbertayMachineLearningGroup/MQTT_ML
 
 ## Data Storage
 
@@ -17,8 +29,8 @@ A small sample may be added to the repository after the team verifies the datase
 
 ## Information to Confirm
 
-- Dataset License Or Usage Terms
-- Download Size
-- Exact Bi-flow CSV Filename(s)
+- SHA-256 checksum of the downloaded archive
+- Extracted file sizes
 - Number of Rows and Columns
-- Target Column and Label Meanings
+- Whether the CSVs contain a multiclass target column or require labels to be
+  assigned from their scenario filenames

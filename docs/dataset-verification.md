@@ -26,9 +26,10 @@ the team must resolve the model/metric discrepancy recorded below.
   University of Strathclyde
 - Official URL: https://pureportal.strath.ac.uk/en/datasets/mqtt-iot-ids2020-mqtt-internet-of-things-intrusion-detection-data/
 - Dataset DOI: https://doi.org/10.21227/bhxy-ep04
-- Licence or usage terms:
+- Licence or usage terms: CC BY 4.0
 - Download date:
-- Download size:
+- Download archive: `biflow_features.zip`
+- Published download size: 14.56 MB
 - File checksum (SHA-256):
 
 Do not use a Kaggle mirror as the only source when an official source is
@@ -36,10 +37,15 @@ available.
 
 ## Selected Data Representation
 
-- CSV filename(s):
+- Expected CSV filename(s): `biflow_normal.csv`, `biflow_scan_A.csv`,
+  `biflow_scan_sU.csv`, `biflow_sparta.csv`, and
+  `biflow_mqtt_bruteforce.csv`
 - Feature level (packet, unidirectional flow, or bidirectional flow): Bidirectional flow
-- Target/label column:
-- Classification task (binary or multiclass):
+- Target/label definition: The dataset authors' companion code assigns class
+  labels by scenario filename. Verify the downloaded schemas before deciding
+  whether to use a CSV target column or construct labels from filenames.
+- Classification task (binary or multiclass): Multiclass: normal, aggressive
+  scan, UDP scan, Sparta SSH brute force, and MQTT brute force
 - Reason this representation matches the paper:
 
 ## Loading Test
@@ -58,6 +64,10 @@ Run a 100,000-row smoke test:
 ```bash
 python src/inspect_dataset.py data/raw/FILE.csv --label LABEL_COLUMN
 ```
+
+If the Bi-flow CSV has no multiclass label column, omit `--label` for the first
+schema inspection. Inspect all five scenario files and document the verified
+file-to-class mapping before combining them for modeling.
 
 After the smoke test succeeds, audit the complete file if the computer has
 enough memory:
