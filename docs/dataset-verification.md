@@ -6,8 +6,8 @@ Status: **Real-data loading completed on the team-provided Kaggle replication;
 official-archive equivalence and clean-checkout verification remain pending.**
 
 The team selected the MQTT-IoT-IDS2020 Bi-flow representation and the
-XMID-MQTT paper on September 8, 2026. Before the numerical target is frozen,
-the team must resolve the model/metric discrepancy recorded below.
+XMID-MQTT paper on September 8, 2026. VoltiMura confirmed the corrected target
+on September 21: Random Forest, Bi-flow, 99.99%, Table 2.
 
 ## Decision Record
 
@@ -15,11 +15,8 @@ the team must resolve the model/metric discrepancy recorded below.
 - Date confirmed by team: September 8, 2026
 - Selected research paper: *XMID-MQTT: explaining machine learning-based intrusion detection system for MQTT protocol in IoT environment*
 - Paper DOI: https://doi.org/10.1007/s10207-025-01036-w
-- Numerical target: **Team confirmation required.** The team message names
-  99.16% Random Forest accuracy, but the paper reports 99.99% Random Forest
-  Bi-flow accuracy in Table 2 and 99.16% Linear SVM Bi-flow accuracy in Table 3.
-- Paper table or figure: Table 2 (Random Forest) or Table 3 (Linear SVM), after
-  the team confirms which result it intends to reproduce
+- Numerical target: **99.99% Random Forest Bi-flow accuracy.**
+- Paper table: **Table 2.** The 99.16% result in Table 3 belongs to Linear SVM.
 
 ## Official Dataset Source
 
@@ -89,7 +86,7 @@ python src/inspect_dataset.py data/raw/FILE.csv --label LABEL_COLUMN --full
 All five replicated CSVs were loaded in full with `src/inspect_dataset.py` on
 September 8, 2026.
 
-| File | Bytes | Rows | `is_attack=0` | `is_attack=1` | Paper-selected rows |
+| File | Bytes | Rows | `is_attack=0` | `is_attack=1` | Scenario-selected rows |
 |---|---:|---:|---:|---:|---:|
 | `biflow_normal.csv` | 26,444,796 | 86,008 | 86,008 | 0 | 86,008 |
 | `biflow_scan_A.csv` | 4,342,749 | 25,693 | 5,786 | 19,907 | 19,907 |
@@ -101,16 +98,20 @@ September 8, 2026.
 - Columns: 32 in every file, with a consistent schema
 - Missing cells: 0
 - Exact duplicate raw rows: 0
-- Paper-selected multiclass counts before feature deduplication: normal 86,008;
+- Scenario-selected multiclass counts before feature deduplication: normal 86,008;
   aggressive scan 19,907; UDP scan 22,434; Sparta 14,116; MQTT brute force
   14,544
-- Unique paper-selected rows after dropping `proto`, `ip_src`, and `ip_dst`, as
-  done by the authors' companion code: normal 86,008; aggressive scan 2,001;
+- Unique scenario-selected rows after dropping `proto`, `ip_src`, and `ip_dst`, as
+  done by the dataset authors' companion code: normal 86,008; aggressive scan 2,001;
   UDP scan 2,232; Sparta 14,116; MQTT brute force 14,544
 - Class-balance note: preprocessing and feature deduplication greatly reduce
   both scan classes. The split must be documented and stratified.
 - Hardware: Windows 11 Home, AMD Ryzen 5 5500U, 5.9 GB usable RAM
 - Full five-file inspection runtime: approximately 15 seconds
+
+Scenario filtering and deduplication follow the dataset authors' companion
+workflow, not a fully specified XMID-MQTT sampling procedure. Their effect must
+be recorded as implementation choices in the final reproduction report.
 
 ### Per-file SHA-256
 
