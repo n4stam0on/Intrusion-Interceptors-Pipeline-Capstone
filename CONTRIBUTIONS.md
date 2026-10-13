@@ -21,6 +21,7 @@ This document tracks individual contributions made by each member of the Intrusi
 | 9/8/26 | 4:48-5:03 PM | Built and tested the reproducible MQTT-IoT-IDS2020 Bi-flow preprocessing pipeline, including class construction, leakage controls, deduplication, feature documentation, class-balance reporting, and stratified train/test artifacts for the Random Forest handoff. | [Issue #14](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/14) / [PR #16](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/16) |
 
 | 10/13/26 | 4:34 PM | Addressed PR #16 review: changed API/CLI defaults to 80/20, restored active binary-label validation, added regression tests, regenerated and verified X/y artifacts, and documented counts and remaining method decisions. | [PR #16](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/16) / [Issue #23](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/23) |
+| 10/13/26 | 4:34 PM | Resolved PR #5 conflicts against current main, preserved the coordinator's updated dataset documentation, and recorded the confirmed Random Forest Bi-flow 99.99% Table 2 target. | [PR #5](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/5) / [Issue #21](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/21) |
 
 ## Mia Gonzalez
 | Date | Time | Contribution | Related Issue/Commit | 
