@@ -83,7 +83,8 @@ The team must document:
 - How preprocessing was prevented from learning from the test set
 - Whether duplicate records appear across the two sets
 
-The 80/20 split must be described as a team implementation decision unless the team verifies that the same split was explicitly specified in XMID-MQTT.
+XMID-MQTT Section 4 (page 6) explicitly specifies the 80/20 split. The random
+seed and stratification remain team implementation decisions.
 
 ## Dataset Verification Checklist
 
@@ -123,3 +124,10 @@ XMID-MQTT paper
 ```
 
 The **99.16% Bi-flow result in Table 3 belongs to Linear SVM** and is not the primary Random Forest reproduction target.
+
+## Recorded Loading Evidence
+
+See [dataset verification](../docs/dataset-verification.md) for the official
+record, replication source, file sizes, row counts, binary labels, missing-value
+and duplicate summaries, SHA-256 checksums, and reproducible inspection commands.
+Official-archive equivalence and teammate verification remain pending.
