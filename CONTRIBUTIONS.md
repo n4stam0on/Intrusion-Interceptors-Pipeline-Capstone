@@ -19,6 +19,8 @@ This document tracks individual contributions made by each member of the Intrusi
 | 9/8/26 | 10:39-10:43 AM | Aligned the repository documentation with the finalized MQTT-IoT-IDS2020 Bi-flow dataset and documented its official source, archive details, and research-paper result question. | [PR #5](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/5) / [`d90091e`](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/commit/d90091ef3cd6d778b7a4619065fb720946ea12bc) / [`6c7b1ff`](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/commit/6c7b1ffa13183d2dcc77f1e539d510ca2a033535) |
 | 9/8/26 | 10:46-10:54 AM | Downloaded the team-provided Kaggle replication, validated all five Bi-flow CSVs, and recorded schema, class, integrity, checksum, and reproducibility evidence. | [Issue #1](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/1) / [PR #5](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/5) / [`0965f94`](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/commit/0965f944769b94685f04b40e20d92f6bc6313020) |
 
+| 10/13/26 | 4:34 PM | Resolved PR #5 conflicts against current main, preserved the coordinator's updated dataset documentation, and recorded the confirmed Random Forest Bi-flow 99.99% Table 2 target. | [PR #5](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/5) / [Issue #21](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/21) |
+
 ## Mia Gonzalez
 | Date | Time | Contribution | Related Issue/Commit | 
 |------|------|--------------|----------------------|
