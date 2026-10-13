@@ -20,6 +20,8 @@ This document tracks individual contributions made by each member of the Intrusi
 | 9/8/26 | 10:46-10:54 AM | Downloaded the team-provided Kaggle replication, validated all five Bi-flow CSVs, and recorded schema, class, integrity, checksum, and reproducibility evidence. | [Issue #1](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/1) / [PR #5](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/5) / [`0965f94`](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/commit/0965f944769b94685f04b40e20d92f6bc6313020) |
 | 9/8/26 | 4:48-5:03 PM | Built and tested the reproducible MQTT-IoT-IDS2020 Bi-flow preprocessing pipeline, including class construction, leakage controls, deduplication, feature documentation, class-balance reporting, and stratified train/test artifacts for the Random Forest handoff. | [Issue #14](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/14) / [PR #16](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/16) |
 
+| 10/13/26 | 4:34 PM | Addressed PR #16 review: changed API/CLI defaults to 80/20, restored active binary-label validation, added regression tests, regenerated and verified X/y artifacts, and documented counts and remaining method decisions. | [PR #16](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/16) / [Issue #23](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/23) |
+
 ## Mia Gonzalez
 | Date | Time | Contribution | Related Issue/Commit | 
 |------|------|--------------|----------------------|

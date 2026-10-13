@@ -117,6 +117,11 @@ def _validate_schema(frame: pd.DataFrame, path: Path) -> None:
             f"unexpected={unexpected}"
         )
 
+    if frame["is_attack"].isna().any():
+        raise ValueError(f"{path.name} contains missing is_attack values")
+    if not frame["is_attack"].isin([0, 1]).all():
+        raise ValueError(f"{path.name} contains unexpected is_attack values; expected 0 or 1")
+
 
 def describe_feature(name: str, dtype: str) -> dict[str, str]:
     if name == "prt_src":
@@ -144,17 +149,10 @@ def describe_feature(name: str, dtype: str) -> dict[str, str]:
         "meaning": f"{direction_name} flow {meaning}",
     }
 
-    labels = set(frame["is_attack"].dropna().unique().tolist())
-    if not labels.issubset({0, 1}):
-        raise ValueError(
-            f"{path.name} contains unexpected is_attack values: {sorted(labels)}"
-        )
-
-
 def prepare_dataset(
     input_dir: Path,
     *,
-    test_size: float = 0.25,
+    test_size: float = 0.20,
     random_state: int = 42,
     drop_constant_features: bool = True,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, dict[str, Any]]:
@@ -355,7 +353,7 @@ def parse_args() -> argparse.Namespace:
         default=Path("data/processed"),
         help="Directory for ignored, generated model-ready files",
     )
-    parser.add_argument("--test-size", type=float, default=0.25)
+    parser.add_argument("--test-size", type=float, default=0.20)
     parser.add_argument("--random-state", type=int, default=42)
     parser.add_argument(
         "--keep-constant-features",

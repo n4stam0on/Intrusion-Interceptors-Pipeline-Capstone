@@ -1,5 +1,6 @@
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 import numpy as np
@@ -9,6 +10,7 @@ from src.preprocess_dataset import (
     EXPECTED_COLUMNS,
     SCENARIOS,
     prepare_dataset,
+    parse_args,
     write_outputs,
 )
 
@@ -102,6 +104,37 @@ class PreprocessingTests(unittest.TestCase):
 
             with self.assertRaisesRegex(ValueError, "Schema mismatch"):
                 prepare_dataset(input_dir, test_size=0.4)
+
+    def test_invalid_labels_are_rejected_before_filtering(self) -> None:
+        for value in (2, -1, "attack", np.nan):
+            with self.subTest(label=value), tempfile.TemporaryDirectory() as temporary:
+                input_dir = Path(temporary)
+                self.create_fixture(input_dir)
+                path = input_dir / SCENARIOS[0].filename
+                frame = pd.read_csv(path)
+                frame["is_attack"] = frame["is_attack"].astype(object)
+                frame.loc[0, "is_attack"] = value
+                frame.to_csv(path, index=False)
+                with self.assertRaisesRegex(ValueError, "is_attack values"):
+                    prepare_dataset(input_dir)
+
+    def test_default_split_is_80_20_in_api_and_cli(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            input_dir = Path(temporary)
+            # Ten distinct rows per class support a stratified 20% holdout.
+            for scenario in SCENARIOS:
+                rows = [
+                    make_row(scenario.class_id * 100 + offset + 1, scenario.selected_is_attack)
+                    for offset in range(10)
+                ]
+                pd.DataFrame(rows).to_csv(input_dir / scenario.filename, index=False)
+            X_train, X_test, y_train, y_test, metadata = prepare_dataset(input_dir)
+            self.assertEqual((len(X_train), len(X_test)), (40, 10))
+            self.assertEqual(metadata["test_size"], 0.20)
+            self.assertEqual(y_train.value_counts().to_dict(), {i: 8 for i in range(5)})
+            self.assertEqual(y_test.value_counts().to_dict(), {i: 2 for i in range(5)})
+            with patch("sys.argv", ["preprocess_dataset.py"]):
+                self.assertEqual(parse_args().test_size, 0.20)
 
 
 if __name__ == "__main__":

@@ -38,7 +38,7 @@ The script performs the following checks and transformations in order:
 9. Drops zero-variance features by default. In the current replication,
    `bwd_num_urg_flags` is always zero. Use `--keep-constant-features` only when a
    strict 28-feature comparison is required.
-10. Creates a reproducible 75/25 stratified split with random seed 42.
+10. Creates a reproducible 80/20 stratified split with random seed 42.
 
 No category encoding is needed after identifiers are removed: all retained
 features are numeric. No scaling is applied because Random Forest decisions are
@@ -104,9 +104,34 @@ recall, F1, and a confusion matrix in addition to overall accuracy.
 | Sparta SSH brute force | 14,116 | 11.87% |
 | MQTT brute force | 14,544 | 12.23% |
 
-The 75/25 split and seed 42 are documented reproduction assumptions. If the
-paper or instructor specifies a different holdout protocol, rerun the script
-with `--test-size` and `--random-state` rather than editing generated files.
+The default 80/20 run produces 95,120 training rows and 23,781 test rows with
+27 features. The integer counts follow scikit-learn's holdout-size rounding.
+
+| Class | Training | Testing |
+|---|---:|---:|
+| Normal | 68,806 | 17,202 |
+| Aggressive scan | 1,601 | 400 |
+| UDP scan | 1,785 | 447 |
+| Sparta SSH brute force | 11,293 | 2,823 |
+| MQTT brute force | 11,635 | 2,909 |
+
+Run `python -m unittest discover -s tests -v` to verify label rejection,
+the default API/CLI split, stratification, determinism, deduplication, schema
+validation, and output round-trip.
+
+The 80/20 split follows XMID-MQTT Section 4 (page 6). Seed 42 and stratification
+are team implementation choices. The comparison target is Random Forest Bi-flow
+accuracy of 99.99% in Table 2, not the Linear SVM result in Table 3.
+
+This workflow is the current leakage-safe baseline, not a complete replication
+of every preprocessing step in XMID-MQTT. Section 4.2 describes IP label encoding
+and Min-Max scaling; this baseline removes IP fields and does not scale. The
+scenario filtering, protocol removal, deduplication, and constant-column removal
+are documented implementation choices, not requirements stated by XMID-MQTT.
+The team must agree on encoding/scaling and the final feature set under Issues
+#20 and #22 before marking the full reproduction dataset complete. Fit any
+learned encoder/scaler on training data only. Use `--test-size` and
+`--random-state` to rerun a documented configuration rather than editing outputs.
 
 ## Sources
 
