@@ -4,16 +4,31 @@ CIS 3370 Intrusion Detection Systems Capstone Project
 
 ## Project Goal
 
-Our team plans to reproduce a machine-learning intrusion detection experiment using the MQT-IoT-IDS2020 Bi-Flow dataset. We will compare our results with a specific numerical result reported in a recent research paper.
+Our team will reproduce the Random Forest intrusion-detection experiment from the XMID-MQTT research paper using the MQTT-IoT-IDS2020 Bi-flow dataset. We will evaluate the reproduced Random Forest model and compare its performance with the 99.99% Bi-flow accuracy reported in Table 2 of the paper. We will also use SHAP and LIME to examine and explain the model’s predictions.
+
+## Experiment Scope
+
+- **Research paper:** XMID-MQTT
+- **Dataset:** MQTT-IoT-IDS2020
+- **Feature representation:** Bi-flow
+- **Model:** Random Forest
+- **Paper comparison:** Table 2
+- **Reported Random Forest Bi-flow accuracy:** 99.99%
+- **Explainability methods:** SHAP and LIME
+
+The 99.16% Bi-flow result reported in Table 3 belongs to Linear SVM and is not the primary reproduction target for this project.
 
 ## Current Status
 
-- Repository Created
-- Collaborators Added
-- GitHub Project Board Created
-- Wiki Home Page Created
-- Capstone Proposal Completed and Submitted
-- XMID-MQTT Paper Selected
-- Reproduction Target Confirmed: 99.16% Random Forest Multiclass Accuracy
-- MQTT-IoT-IDS2020 Bi-flow Dataset Selected
-- Dataset Loading and Verification In Progress
+- Repository created
+- Collaborators added
+- GitHub Project board created
+- Wiki pages created
+- Capstone proposal completed and submitted
+- XMID-MQTT paper selected
+- MQTT-IoT-IDS2020 Bi-flow dataset selected
+- Random Forest Table 2 reproduction target confirmed
+- M1 — Proposal & Research Selection completed
+- M2 — Dataset Preparation & Model Implementation in progress
+- Role-based sub-issues being created and assigned
+- Dataset loading and verification in progress
