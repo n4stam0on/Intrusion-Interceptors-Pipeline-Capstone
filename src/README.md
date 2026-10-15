@@ -1,6 +1,6 @@
 # Source Code
 
-This folder will contain reusable  Python scripts for:
+This folder contains reusable Python scripts for:
 
 - Loading the dataset
 - Cleaning and preprocessing data
@@ -8,4 +8,8 @@ This folder will contain reusable  Python scripts for:
 - Calculating evaluation metrics
 - Producing results and comparison tables
 
-The source files will be added after the team confirms the paper and dataset
+## Available workflow
+
+Run `python src/preprocess_dataset.py` from the repository root to validate,
+clean, deduplicate, and split the five MQTT-IoT-IDS2020 Bi-flow CSVs. See
+`docs/preprocessing.md` for inputs, decisions, outputs, and the model handoff.
