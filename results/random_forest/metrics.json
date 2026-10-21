@@ -1,0 +1,7 @@
+{
+    "accuracy": 0.9994112947310878,
+    "n_estimators": 100,
+    "random_state": 42,
+    "train_rows": 95120,
+    "test_rows": 23781
+}
