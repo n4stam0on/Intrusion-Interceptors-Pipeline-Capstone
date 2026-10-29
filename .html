@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bi-Flow Data Quality & Class Balance Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#0B0F17',
+                            card: '#111827',
+                            border: '#1F2937',
+                            hover: '#1E293B',
+                            normal: '#10B981', // Emerald 500
+                            attack: '#EF4444', // Red 500
+                            accent: '#3B82F6', // Blue 500
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0B0F17;
+            color: #F3F4F6;
+            font-family: 'Inter', sans-serif;
+        }
+        .glow-border {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
+        }
+        .glow-border:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.25);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F17;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1F2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-cyber-border bg-cyber-card/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="p-2.5 bg-blue-500/10 border border-blue-500/30 rounded-xl text-blue-400">
+                    <i class="fa-solid fa-shield-halved text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                        Bi-Flow Dataset Analysis Report
+                        <span class="px-2.5 py-0.5 text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">
+                            Verified
+                        </span>
+                    </h1>
+                    <p class="text-xs text-gray-400">Data Quality Review & Class Balance Baseline Verification</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <button onclick="copyMarkdownWorklog()" class="px-3.5 py-2 text-xs font-semibold bg-cyber-accent hover:bg-blue-600 text-white rounded-lg transition duration-200 flex items-center space-x-2 shadow-lg shadow-blue-500/20">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy GitHub Markdown</span>
+                </button>
+                <a href="#github-export" class="px-3.5 py-2 text-xs font-semibold border border-cyber-border bg-cyber-bg hover:bg-cyber-hover text-gray-300 rounded-lg transition duration-200 flex items-center space-x-2">
+                    <i class="fa-brands fa-github text-sm"></i>
+                    <span>View Worklog</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-8">
+
+        <!-- Notification Toast -->
+        <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-emerald-600 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 pointer-events-none">
+            <i class="fa-solid fa-circle-check text-lg"></i>
+            <span id="toast-message" class="text-sm font-medium">Copied to clipboard!</span>
+        </div>
+
+        <!-- Top KPI Cards -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- Card 1 -->
+            <div class="bg-cyber-card border border-cyber-border rounded-xl p-5 glow-border transition duration-200">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-gray-400">Total Bi-Flow Records</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">259,379</h3>
+                    </div>
+                    <div class="p-3 bg-blue-500/10 text-blue-400 rounded-lg border border-blue-500/20">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-xs text-gray-400">
+                    <i class="fa-solid fa-folder-open text-blue-400 mr-1.5"></i>
+                    <span>Across 5 distinct Scenario CSV files</span>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-cyber-card border border-cyber-border rounded-xl p-5 glow-border transition duration-200">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-gray-400">Feature Dimensions</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">32 Columns</h3>
+                    </div>
+                    <div class="p-3 bg-purple-500/10 text-purple-400 rounded-lg border border-purple-500/20">
+                        <i class="fa-solid fa-table-columns"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-xs text-gray-400">
+                    <i class="fa-solid fa-tag text-purple-400 mr-1.5"></i>
+                    <span>31 Features + 1 Label (<code class="text-purple-300">is_attack</code>)</span>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-cyber-card border border-cyber-border rounded-xl p-5 glow-border transition duration-200">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-gray-400">Data Cleanliness</p>
+                        <h3 class="text-2xl font-bold text-emerald-400 mt-1">100.0%</h3>
+                    </div>
+                    <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-lg border border-emerald-500/20">
+                        <i class="fa-solid fa-check-double"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-xs text-emerald-400">
+                    <i class="fa-solid fa-circle-check mr-1.5"></i>
+                    <span>0 Missing | 0 Duplicates | 0 Infs</span>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-cyber-card border border-cyber-border rounded-xl p-5 glow-border transition duration-200">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-semibold uppercase tracking-wider text-gray-400">Global Class Ratio</p>
+                        <h3 class="text-2xl font-bold text-white mt-1">72.6% / 27.4%</h3>
+                    </div>
+                    <div class="p-3 bg-red-500/10 text-red-400 rounded-lg border border-red-500/20">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center text-xs text-gray-400">
+                    <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 mr-1.5"></span>
+                    <span class="mr-2">Normal</span>
+                    <span class="inline-block w-2 h-2 rounded-full bg-red-400 mr-1.5"></span>
+                    <span>Attack</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Aggregate Class Donut Chart -->
+            <div class="bg-cyber-card border border-cyber-border rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-cyber-accent"></i>
+                        Aggregate Class Distribution
+                    </h2>
+                    <p class="text-xs text-gray-400 mt-1">Total distribution across all combined scenario files.</p>
+                </div>
+                <div class="relative my-6 flex items-center justify-center h-64">
+                    <canvas id="donutChart"></canvas>
+                </div>
+                <div class="grid grid-cols-2 gap-3 pt-4 border-t border-cyber-border text-xs">
+                    <div class="p-2.5 bg-cyber-bg rounded-lg border border-cyber-border">
+                        <div class="text-gray-400 mb-0.5">Normal Traffic</div>
+                        <div class="text-sm font-bold text-emerald-400">188,378</div>
+                        <div class="text-[10px] text-gray-500">72.63% of total</div>
+                    </div>
+                    <div class="p-2.5 bg-cyber-bg rounded-lg border border-cyber-border">
+                        <div class="text-gray-400 mb-0.5">Attack Traffic</div>
+                        <div class="text-sm font-bold text-red-400">71,001</div>
+                        <div class="text-[10px] text-gray-500">27.37% of total</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Per-File Breakdown Bar Chart -->
+            <div class="lg:col-span-2 bg-cyber-card border border-cyber-border rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-column text-cyber-accent"></i>
+                        Class Balance per Dataset File
+                    </h2>
+                    <p class="text-xs text-gray-400 mt-1">Normal vs Attack proportions categorized by scenario context.</p>
+                </div>
+                <div class="relative my-4 h-64">
+                    <canvas id="barChart"></canvas>
+                </div>
+                <div class="flex flex-wrap items-center justify-between text-xs text-gray-400 pt-3 border-t border-cyber-border gap-2">
+                    <span class="flex items-center"><i class="fa-solid fa-circle-info text-blue-400 mr-1.5"></i> High variance observed in file-level purity (0.00% to 87.11% Attack).</span>
+                    <span class="text-gray-500 font-mono text-[11px]">Method: Stacked Count Comparison</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Data Table -->
+        <section class="bg-cyber-card border border-cyber-border rounded-xl overflow-hidden shadow-xl">
+            <div class="p-6 border-b border-cyber-border flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-table text-cyber-accent"></i>
+                        Detailed Dataset Breakdown
+                    </h2>
+                    <p class="text-xs text-gray-400 mt-0.5">File-by-file record count and attack ratio distribution</p>
+                </div>
+
+                <!-- Table Controls -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                        <input type="text" id="searchInput" placeholder="Filter datasets..." onkeyup="filterTable()"
+                            class="bg-cyber-bg border border-cyber-border text-gray-200 text-xs rounded-lg pl-8 pr-3 py-2 focus:outline-none focus:border-cyber-accent w-48">
+                    </div>
+                    
+                    <div class="flex rounded-lg border border-cyber-border p-1 bg-cyber-bg text-xs">
+                        <button onclick="filterType('all')" id="filter-all" class="px-2.5 py-1 rounded-md text-white font-medium bg-cyber-accent transition">All</button>
+                        <button onclick="filterType('high')" id="filter-high" class="px-2.5 py-1 rounded-md text-gray-400 hover:text-white transition">&gt;50% Attack</button>
+                        <button onclick="filterType('low')" id="filter-low" class="px-2.5 py-1 rounded-md text-gray-400 hover:text-white transition">&le;50% Attack</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Container -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse" id="datasetTable">
+                    <thead>
+                        <tr class="bg-cyber-bg/60 border-b border-cyber-border text-[11px] uppercase tracking-wider text-gray-400 font-semibold">
+                            <th class="py-3.5 px-6 cursor-pointer hover:text-white" onclick="sortTable(0)">
+                                Dataset File Name <i class="fa-solid fa-sort ml-1 text-gray-600"></i>
+                            </th>
+                            <th class="py-3.5 px-6 text-right cursor-pointer hover:text-white" onclick="sortTable(1)">
+                                Normal Count (0) <i class="fa-solid fa-sort ml-1 text-gray-600"></i>
+                            </th>
+                            <th class="py-3.5 px-6 text-right cursor-pointer hover:text-white" onclick="sortTable(2)">
+                                Attack Count (1) <i class="fa-solid fa-sort ml-1 text-gray-600"></i>
+                            </th>
+                            <th class="py-3.5 px-6 text-right cursor-pointer hover:text-white" onclick="sortTable(3)">
+                                Total Records <i class="fa-solid fa-sort ml-1 text-gray-600"></i>
+                            </th>
+                            <th class="py-3.5 px-6 cursor-pointer hover:text-white" onclick="sortTable(4)">
+                                Attack Ratio % <i class="fa-solid fa-sort ml-1 text-gray-600"></i>
+                            </th>
+                            <th class="py-3.5 px-6 text-center">Data Quality Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-cyber-border text-xs text-gray-300 font-mono">
+                        <!-- Row 1 -->
+                        <tr class="hover:bg-cyber-hover/50 transition duration-150" data-attack-ratio="0">
+                            <td class="py-4 px-6 font-semibold font-sans text-white flex items-center space-x-2">
+                                <i class="fa-regular fa-file-code text-gray-400"></i>
+                                <span>biflow_normal.csv</span>
+                            </td>
+                            <td class="py-4 px-6 text-right text-emerald-400">86,008</td>
+                            <td class="py-4 px-6 text-right text-gray-500">0</td>
+                            <td class="py-4 px-6 text-right font-bold text-white">86,008</td>
+                            <td class="py-4 px-6">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-12 text-right">0.00%</span>
+                                    <div class="w-24 bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                                        <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-center">
+                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">100% Clean</span>
+                            </td>
+                        </tr>
+
+                        <!-- Row 2 -->
+                        <tr class="hover:bg-cyber-hover/50 transition duration-150" data-attack-ratio="15.46">
+                            <td class="py-4 px-6 font-semibold font-sans text-white flex items-center space-x-2">
+                                <i class="fa-regular fa-file-code text-gray-400"></i>
+                                <span>biflow_sparta.csv</span>
+                            </td>
+                            <td class="py-4 px-6 text-right text-emerald-400">77,202</td>
+                            <td class="py-4 px-6 text-right text-red-400">14,116</td>
+                            <td class="py-4 px-6 text-right font-bold text-white">91,318</td>
+                            <td class="py-4 px-6">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-12 text-right">15.46%</span>
+                                    <div class="w-24 bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                                        <div class="bg-red-500 h-1.5 rounded-full" style="width: 15.46%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-center">
+                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">100% Clean</span>
+                            </td>
+                        </tr>
+
+                        <!-- Row 3 -->
+                        <tr class="hover:bg-cyber-hover/50 transition duration-150" data-attack-ratio="56.56">
+                            <td class="py-4 px-6 font-semibold font-sans text-white flex items-center space-x-2">
+                                <i class="fa-regular fa-file-code text-gray-400"></i>
+                                <span>biflow_scan_sU.csv</span>
+                            </td>
+                            <td class="py-4 px-6 text-right text-emerald-400">17,230</td>
+                            <td class="py-4 px-6 text-right text-red-400">22,434</td>
+                            <td class="py-4 px-6 text-right font-bold text-white">39,664</td>
+                            <td class="py-4 px-6">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-12 text-right">56.56%</span>
+                                    <div class="w-24 bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                                        <div class="bg-red-500 h-1.5 rounded-full" style="width: 56.56%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-center">
+                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">100% Clean</span>
+                            </td>
+                        </tr>
+
+                        <!-- Row 4 -->
+                        <tr class="hover:bg-cyber-hover/50 transition duration-150" data-attack-ratio="77.48">
+                            <td class="py-4 px-6 font-semibold font-sans text-white flex items-center space-x-2">
+                                <i class="fa-regular fa-file-code text-gray-400"></i>
+                                <span>biflow_scan_A.csv</span>
+                            </td>
+                            <td class="py-4 px-6 text-right text-emerald-400">5,786</td>
+                            <td class="py-4 px-6 text-right text-red-400">19,907</td>
+                            <td class="py-4 px-6 text-right font-bold text-white">25,693</td>
+                            <td class="py-4 px-6">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-12 text-right">77.48%</span>
+                                    <div class="w-24 bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                                        <div class="bg-red-500 h-1.5 rounded-full" style="width: 77.48%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-center">
+                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">100% Clean</span>
+                            </td>
+                        </tr>
+
+                        <!-- Row 5 -->
+                        <tr class="hover:bg-cyber-hover/50 transition duration-150" data-attack-ratio="87.11">
+                            <td class="py-4 px-6 font-semibold font-sans text-white flex items-center space-x-2">
+                                <i class="fa-regular fa-file-code text-gray-400"></i>
+                                <span>biflow_mqtt_bruteforce.csv</span>
+                            </td>
+                            <td class="py-4 px-6 text-right text-emerald-400">2,152</td>
+                            <td class="py-4 px-6 text-right text-red-400">14,544</td>
+                            <td class="py-4 px-6 text-right font-bold text-white">16,696</td>
+                            <td class="py-4 px-6">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-12 text-right">87.11%</span>
+                                    <div class="w-24 bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                                        <div class="bg-red-500 h-1.5 rounded-full" style="width: 87.11%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-center">
+                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">100% Clean</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- Table Summary Footer -->
+                    <tfoot class="bg-cyber-bg border-t border-cyber-border font-mono font-bold text-white text-xs">
+                        <tr>
+                            <td class="py-4 px-6 font-sans">Combined Total</td>
+                            <td class="py-4 px-6 text-right text-emerald-400">188,378</td>
+                            <td class="py-4 px-6 text-right text-red-400">71,001</td>
+                            <td class="py-4 px-6 text-right">259,379</td>
+                            <td class="py-4 px-6">
+                                <div class="flex items-center space-x-3">
+                                    <span class="w-12 text-right">27.37%</span>
+                                    <div class="w-24 bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                                        <div class="bg-red-500 h-1.5 rounded-full" style="width: 27.37%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-center font-sans font-normal text-gray-400">0 Missing / 0 Dupes</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <!-- Recommendations & Experiment Plan -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-cyber-card border border-cyber-border rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-2 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-lg">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-white">Class Imbalance Assessment</h3>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed space-y-2">
+                        While the combined aggregate distribution displays a moderate <strong>72.63% / 27.37%</strong> ratio, individual files exhibit extreme class purity (e.g., <code>biflow_normal.csv</code> contains 0% attacks while <code>biflow_mqtt_bruteforce.csv</code> contains 87.11% attacks).
+                    </p>
+                    <ul class="mt-4 space-y-2 text-xs text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-angle-right text-amber-400 mt-0.5 mr-2"></i>
+                            <span>A naive dummy model predicting "Normal" would achieve <strong>72.63% accuracy</strong> without learning attack signatures.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-angle-right text-amber-400 mt-0.5 mr-2"></i>
+                            <span>Random train/test splits without stratification risk distorting attack concentrations in evaluation folds.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-cyber-card border border-cyber-border rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center space-x-3 mb-3">
+                        <div class="p-2 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-lg">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-white">Random Forest Training Strategy</h3>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        To build a robust baseline Random Forest classifier, implement the following experimental configurations in step 2:
+                    </p>
+                    <div class="mt-4 space-y-2 text-xs">
+                        <div class="p-2.5 bg-cyber-bg border border-cyber-border rounded-lg flex items-center justify-between">
+                            <span class="text-gray-300 font-medium">Splitting Scheme</span>
+                            <span class="text-blue-400 font-mono">StratifiedKFold (k=5)</span>
+                        </div>
+                        <div class="p-2.5 bg-cyber-bg border border-cyber-border rounded-lg flex items-center justify-between">
+                            <span class="text-gray-300 font-medium">Evaluation Metrics</span>
+                            <span class="text-blue-400 font-mono">Macro F1, Precision, Recall, ROC-AUC</span>
+                        </div>
+                        <div class="p-2.5 bg-cyber-bg border border-cyber-border rounded-lg flex items-center justify-between">
+                            <span class="text-gray-300 font-medium">Class Weighting</span>
+                            <span class="text-blue-400 font-mono">class_weight='balanced'</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GitHub Markdown Copy Section -->
+        <section id="github-export" class="bg-cyber-card border border-cyber-border rounded-xl p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                <div>
+                    <h3 class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fa-brands fa-markdown text-cyber-accent"></i>
+                        GitHub Work Log & Results (Markdown)
+                    </h3>
+                    <p class="text-xs text-gray-400 mt-0.5">Copy this formatted text directly into your repository's <code class="text-gray-300">results/</code> directory or GitHub Wiki.</p>
+                </div>
+                <button onclick="copyMarkdownWorklog()" class="px-4 py-2 bg-cyber-accent hover:bg-blue-600 text-white rounded-lg text-xs font-semibold transition flex items-center space-x-2 self-start sm:self-auto">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>Copy Markdown Code</span>
+                </button>
+            </div>
+
+            <div class="relative">
+                <pre class="bg-cyber-bg border border-cyber-border rounded-xl p-4 text-xs font-mono text-gray-300 overflow-x-auto max-h-72 leading-relaxed"><code id="markdown-code"># Work Log: Bi-flow Class Balance and Data Quality Analysis
+
+## Objective
+Produce a verified summary of class balance and dataset quality prior to Random Forest baseline training.
+
+## Executive Summary & Data Quality Assessment
+- **Total Records Analyzed:** 259,379 bidirectional flow samples across 5 CSV files.
+- **Missing Values:** 0 null values across all 32 features.
+- **Duplicate Records:** 0 duplicate rows detected.
+- **Data Cleanliness:** 100% verified. No imputation or filtering required.
+
+## Class Distribution Breakdown
+
+| Dataset File | Normal Traffic (0) | Attack Traffic (1) | Total Records | Attack % | Status |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| `biflow_normal.csv` | 86,008 | 0 | 86,008 | 0.00% | Verified |
+| `biflow_sparta.csv` | 77,202 | 14,116 | 91,318 | 15.46% | Verified |
+| `biflow_scan_sU.csv` | 17,230 | 22,434 | 39,664 | 56.56% | Verified |
+| `biflow_scan_A.csv` | 5,786 | 19,907 | 25,693 | 77.48% | Verified |
+| `biflow_mqtt_bruteforce.csv` | 2,152 | 14,544 | 16,696 | 87.11% | Verified |
+| **Combined Total** | **188,378** | **71,001** | **259,379** | **27.37%** | **Clean** |
+
+## Key Observations & Recommendations
+1. **Class Ratio:** Aggregate distribution is 72.63% Normal vs 27.37% Attack (~3:1 ratio).
+2. **Imbalance Variance:** File-level attack rates vary significantly from 0.00% to 87.11%.
+3. **Splitting Strategy:** Must use `StratifiedKFold` cross-validation to maintain class proportions.
+4. **Primary Evaluation Metrics:** Precision, Recall, Macro F1-score, and ROC-AUC. Avoid raw accuracy as a single baseline performance metric.</code></pre>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript logic -->
+    <script>
+        // Copy Markdown to Clipboard
+        function copyMarkdownWorklog() {
+            const codeText = document.getElementById('markdown-code').innerText;
+            
+            // Fallback copy execution for iFrames
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            showToast("GitHub Markdown copied to clipboard!");
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Table Filtering
+        function filterTable() {
+            const input = document.getElementById("searchInput").value.toLowerCase();
+            const table = document.getElementById("datasetTable");
+            const rows = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+            for (let i = 0; i < rows.length; i++) {
+                const text = rows[i].textContent.toLowerCase();
+                if (text.includes(input)) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+
+        function filterType(type) {
+            const rows = document.querySelectorAll("#datasetTable tbody tr");
+            
+            // Toggle active filter button styling
+            document.getElementById('filter-all').className = "px-2.5 py-1 rounded-md text-gray-400 hover:text-white transition";
+            document.getElementById('filter-high').className = "px-2.5 py-1 rounded-md text-gray-400 hover:text-white transition";
+            document.getElementById('filter-low').className = "px-2.5 py-1 rounded-md text-gray-400 hover:text-white transition";
+            
+            document.getElementById(`filter-${type}`).className = "px-2.5 py-1 rounded-md text-white font-medium bg-cyber-accent transition";
+
+            rows.forEach(row => {
+                const ratio = parseFloat(row.getAttribute('data-attack-ratio'));
+                if (type === 'all') {
+                    row.style.display = "";
+                } else if (type === 'high' && ratio > 50) {
+                    row.style.display = "";
+                } else if (type === 'low' && ratio <= 50) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+
+        // Simple Table Sorting
+        let sortDirection = false;
+        function sortTable(columnIndex) {
+            const table = document.getElementById("datasetTable");
+            const tbody = table.querySelector("tbody");
+            const rows = Array.from(tbody.querySelectorAll("tr"));
+
+            sortDirection = !sortDirection;
+
+            rows.sort((a, b) => {
+                let cellA = a.children[columnIndex].innerText.trim().replace(/,/g, '').replace('%', '');
+                let cellB = b.children[columnIndex].innerText.trim().replace(/,/g, '').replace('%', '');
+
+                let numA = parseFloat(cellA);
+                let numB = parseFloat(cellB);
+
+                if (!isNaN(numA) && !isNaN(numB)) {
+                    return sortDirection ? numA - numB : numB - numA;
+                } else {
+                    return sortDirection ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+                }
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        // Render Chart.js Visualizations
+        window.onload = function() {
+            Chart.defaults.color = '#9CA3AF';
+            Chart.defaults.font.family = 'Inter';
+
+            // Donut Chart
+            const donutCtx = document.getElementById('donutChart').getContext('2d');
+            new Chart(donutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Normal (0)', 'Attack (1)'],
+                    datasets: [{
+                        data: [188378, 71001],
+                        backgroundColor: ['#10B981', '#EF4444'],
+                        borderColor: '#111827',
+                        borderWidth: 3,
+                        hoverOffset: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                font: { size: 12, weight: '500' },
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1F2937',
+                            titleColor: '#F3F4F6',
+                            bodyColor: '#F3F4F6',
+                            borderColor: '#374151',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    const total = 259379;
+                                    const value = context.raw;
+                                    const percentage = ((value / total) * 100).toFixed(2);
+                                    return ` ${context.label}: ${value.toLocaleString()} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '72%'
+                }
+            });
+
+            // Stacked Bar Chart
+            const barCtx = document.getElementById('barChart').getContext('2d');
+            new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'normal.csv',
+                        'sparta.csv',
+                        'scan_sU.csv',
+                        'scan_A.csv',
+                        'mqtt_bruteforce.csv'
+                    ],
+                    datasets: [
+                        {
+                            label: 'Normal Traffic (0)',
+                            data: [86008, 77202, 17230, 5786, 2152],
+                            backgroundColor: '#10B981',
+                            borderRadius: 4
+                        },
+                        {
+                            label: 'Attack Traffic (1)',
+                            data: [0, 14116, 22434, 19907, 14544],
+                            backgroundColor: '#EF4444',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true,
+                            grid: { display: false }
+                        },
+                        y: {
+                            stacked: true,
+                            grid: { color: '#1F2937' },
+                            ticks: {
+                                callback: function(value) {
+                                    return (value / 1000) + 'k';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            align: 'end',
+                            labels: {
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                font: { size: 11 }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1F2937',
+                            titleColor: '#F3F4F6',
+                            bodyColor: '#F3F4F6',
+                            borderColor: '#374151',
+                            borderWidth: 1,
+                            padding: 12
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
