@@ -1,0 +1,5 @@
+# Data-path constraints matching the baseline environment used for PR #45 verification.
+# Install together with Requirements.txt using pip's -c option.
+numpy==2.5.2
+pandas==3.0.5
+scikit-learn==1.9.0

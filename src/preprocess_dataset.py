@@ -231,12 +231,6 @@ def prepare_dataset(
 
     X = deduplicated.loc[:, feature_columns].copy()
     y = deduplicated["target"].astype("int64")
-    constant_features = [
-        column for column in X.columns if X[column].nunique(dropna=False) <= 1
-    ]
-    if drop_constant_features:
-        X = X.drop(columns=constant_features)
-
     X_train, X_test, y_train, y_test = train_test_split(
         X,
         y,
@@ -244,6 +238,15 @@ def prepare_dataset(
         random_state=random_state,
         stratify=y,
     )
+
+    # Feature selection must not learn whether a column varies in the holdout.
+    constant_features = [
+        column for column in X_train.columns if X_train[column].nunique(dropna=False) <= 1
+    ]
+    if drop_constant_features:
+        X = X.drop(columns=constant_features)
+        X_train = X_train.drop(columns=constant_features)
+        X_test = X_test.drop(columns=constant_features)
 
     X_train = X_train.reset_index(drop=True)
     X_test = X_test.reset_index(drop=True)
