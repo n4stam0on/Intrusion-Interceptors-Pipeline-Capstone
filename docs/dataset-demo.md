@@ -6,8 +6,9 @@ Owner: Kien Nguyen. Supports #21, #23, #31, #32, #39, and #40.
 
 Use Python 3.12. The five CSV files must be obtained separately using the source
 information in `data/README.md` and checked against `docs/dataset-verification.md`.
-The current `Requirements.txt` is unpinned; the verification report records the
-versions actually tested. This is a verified command sequence supplied for #19,
+The current `Requirements.txt` is unpinned; the additional data constraints fix
+the three packages that control parsing and splitting. Reports record the
+versions actually tested. This command sequence is supplied for #19,
 whose coordinator-owned setup guide is still pending.
 
 ```powershell
@@ -17,7 +18,7 @@ Set-Location Intrusion-Interceptors-Pipeline-Capstone
 git fetch origin mvpmvp/final-data-verification
 git switch mvpmvp/final-data-verification
 py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r Requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r Requirements.txt -c requirements-data-verification.txt
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
@@ -89,3 +90,14 @@ with 99.16%; correct it to 99.99% in Table 2, record the 80/20 split, seed 42,
 27 features, class mapping, and the deviations above. Final documentation
 approval remains pending these corrections. This review supports #39 without
 claiming the Wiki is already accurate.
+
+## Environment comparison
+
+The first environment used NumPy 2.5.2, pandas 3.0.5, and scikit-learn 1.9.0.
+A fresh unpinned install resolved to 2.5.4, 3.1.1, and 1.9.1. Labels, feature
+names, and split assignments matched, but 514,047 training cells and 128,344 test
+cells differed by at most 9.094947017729282e-13. That difference is numerically
+tiny but invalidates a claim of bit-identical output hashes. The added constraints
+provide an explicit baseline environment; compare the pinned-run report with
+the original before signing off. These are data-path constraints, not a complete
+lockfile for SHAP/LIME and all transitive/model dependencies.

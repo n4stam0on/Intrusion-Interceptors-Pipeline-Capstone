@@ -1,0 +1,21 @@
+{
+  "verified_on": "2026-11-05",
+  "model_branch_commit": "9e7e515",
+  "preparation_commit": "7eae17cecdf6f49ee1c04c99a7a91b85a910dc38",
+  "data_report": "data-verification.json",
+  "result": "Reproduced PR #45's reported baseline accuracy using verified arrays",
+  "accuracy": 0.9994112947310878,
+  "correct_predictions": 23767,
+  "test_rows": 23781,
+  "train_rows": 95120,
+  "features": 27,
+  "n_estimators": 100,
+  "random_state": 42,
+  "confusion_matrix_class_order": ["normal", "scan_A", "scan_sU", "sparta", "mqtt_bruteforce"],
+  "confusion_matrix_rows_true_columns_predicted": [[17197,0,0,0,5],[0,400,0,0,0],[0,0,447,0,0],[0,0,0,2823,0],[9,0,0,0,2900]],
+  "limitations": [
+    "This rerun connects the model script to the verified arrays; the author must still attest the hashes of their original run.",
+    "It does not establish identical preprocessing to XMID-MQTT or generalization to new capture sessions.",
+    "Independent teammate reproduction remains pending."
+  ]
+}
