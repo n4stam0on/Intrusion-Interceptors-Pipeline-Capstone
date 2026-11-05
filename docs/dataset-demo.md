@@ -98,6 +98,8 @@ A fresh unpinned install resolved to 2.5.4, 3.1.1, and 1.9.1. Labels, feature
 names, and split assignments matched, but 514,047 training cells and 128,344 test
 cells differed by at most 9.094947017729282e-13. That difference is numerically
 tiny but invalidates a claim of bit-identical output hashes. The added constraints
-provide an explicit baseline environment; compare the pinned-run report with
-the original before signing off. These are data-path constraints, not a complete
+provide an explicit baseline environment. The fresh constrained run matched all
+six logical array hashes from the original environment exactly (41.374 seconds,
+installation excluded); all six tests passed in that environment. See
+`results/data-verification-pinned.json`. These are data-path constraints, not a complete
 lockfile for SHAP/LIME and all transitive/model dependencies.
