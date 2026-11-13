@@ -231,12 +231,6 @@ def prepare_dataset(
 
     X = deduplicated.loc[:, feature_columns].copy()
     y = deduplicated["target"].astype("int64")
-    constant_features = [
-        column for column in X.columns if X[column].nunique(dropna=False) <= 1
-    ]
-    if drop_constant_features:
-        X = X.drop(columns=constant_features)
-
     X_train, X_test, y_train, y_test = train_test_split(
         X,
         y,
@@ -244,6 +238,15 @@ def prepare_dataset(
         random_state=random_state,
         stratify=y,
     )
+
+    constant_features = [
+        column
+        for column in X_train.columns
+        if X_train[column].nunique(dropna=False) <= 1
+    ]
+    if drop_constant_features:
+        X_train = X_train.drop(columns=constant_features)
+        X_test = X_test.drop(columns=constant_features)
 
     X_train = X_train.reset_index(drop=True)
     X_test = X_test.reset_index(drop=True)
@@ -276,11 +279,11 @@ def prepare_dataset(
         "dropped_identifier_or_leakage_columns": list(DROP_FOR_MODELING),
         "constant_features_detected": constant_features,
         "constant_features_dropped": constant_features if drop_constant_features else [],
-        "feature_count": int(X.shape[1]),
-        "feature_names": X.columns.tolist(),
-        "feature_dtypes": {name: str(dtype) for name, dtype in X.dtypes.items()},
+        "feature_count": int(X_train.shape[1]),
+        "feature_names": X_train.columns.tolist(),
+        "feature_dtypes": {name: str(dtype) for name, dtype in X_train.dtypes.items()},
         "feature_schema": [
-            describe_feature(name, str(X.dtypes[name])) for name in X.columns
+            describe_feature(name, str(X_train.dtypes[name])) for name in X_train.columns
         ],
         "missing_feature_cells": missing_cells,
         "infinite_feature_cells": infinite_cells,
