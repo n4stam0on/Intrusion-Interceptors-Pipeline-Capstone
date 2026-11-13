@@ -20,3 +20,7 @@ data/processed/
 # Computer files
 .DS_Store
 Thumbs.db
+
+# Locally generated ML artifacts
+results/random_forest/*.joblib
+results/lime/*.html
