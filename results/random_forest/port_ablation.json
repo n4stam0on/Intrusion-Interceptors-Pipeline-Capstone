@@ -1,0 +1,102 @@
+{
+  "original_27_features": {
+    "features": 27,
+    "accuracy": 0.9994112947310878,
+    "macro_f1": 0.9994370274286817,
+    "classification_report": {
+      "normal": {
+        "precision": 0.999476926653493,
+        "recall": 0.9997093361237065,
+        "f1-score": 0.9995931178795628,
+        "support": 17202.0
+      },
+      "scan_A": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 400.0
+      },
+      "scan_sU": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 447.0
+      },
+      "sparta": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 2823.0
+      },
+      "mqtt_bruteforce": {
+        "precision": 0.9982788296041308,
+        "recall": 0.9969061533172912,
+        "f1-score": 0.9975920192638459,
+        "support": 2909.0
+      },
+      "accuracy": 0.9994112947310878,
+      "macro avg": {
+        "precision": 0.9995511512515248,
+        "recall": 0.9993230978881995,
+        "f1-score": 0.9994370274286817,
+        "support": 23781.0
+      },
+      "weighted avg": {
+        "precision": 0.9994110932093605,
+        "recall": 0.9994112947310878,
+        "f1-score": 0.9994111264371881,
+        "support": 23781.0
+      }
+    }
+  },
+  "without_source_destination_ports": {
+    "features": 25,
+    "accuracy": 0.9994533451074387,
+    "macro_f1": 0.9994771650208515,
+    "classification_report": {
+      "normal": {
+        "precision": 0.9994769570523624,
+        "recall": 0.9997674688989653,
+        "f1-score": 0.9996221918684065,
+        "support": 17202.0
+      },
+      "scan_A": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 400.0
+      },
+      "scan_sU": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 447.0
+      },
+      "sparta": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 2823.0
+      },
+      "mqtt_bruteforce": {
+        "precision": 0.9986225895316805,
+        "recall": 0.9969061533172912,
+        "f1-score": 0.9977636332358507,
+        "support": 2909.0
+      },
+      "accuracy": 0.9994533451074387,
+      "macro avg": {
+        "precision": 0.9996199093168086,
+        "recall": 0.9993347244432513,
+        "f1-score": 0.9994771650208515,
+        "support": 23781.0
+      },
+      "weighted avg": {
+        "precision": 0.9994531654750597,
+        "recall": 0.9994533451074387,
+        "f1-score": 0.9994531497247138,
+        "support": 23781.0
+      }
+    }
+  }
+}
