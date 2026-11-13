@@ -26,3 +26,5 @@ results/random_forest/*.joblib
 results/lime/*.html
 
 .venv-test/
+
+results/reproducibility_backup/
