@@ -24,3 +24,5 @@ Thumbs.db
 # Locally generated ML artifacts
 results/random_forest/*.joblib
 results/lime/*.html
+
+.venv-test/
