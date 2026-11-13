@@ -1,0 +1,20 @@
+{
+  "random_state": 42,
+  "num_samples": 1000,
+  "num_features": 10,
+  "selected_test_indices": [
+    0,
+    25,
+    5,
+    3,
+    31,
+    4864
+  ],
+  "class_names": [
+    "normal",
+    "scan_A",
+    "scan_sU",
+    "sparta",
+    "mqtt_bruteforce"
+  ]
+}
