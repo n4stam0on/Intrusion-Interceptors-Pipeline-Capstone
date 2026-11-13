@@ -83,8 +83,7 @@ The paper comparison is 99.99% for Random Forest Bi-flow in Table 2. The current
 
 ## 7. Run tests
 
-```powershell
-python -m pytest
+```powershellpython -m unittest discover -s tests -v
 ```
 
 If a command is unavailable, first confirm that the branch or PR containing it is checked out. If imports fail, confirm the virtual environment is active and rerun dependency installation.
