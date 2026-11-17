@@ -1,0 +1,136 @@
+{
+  "recorded_on": "2026-11-17",
+  "status": "retrospective author-side reference, not independent acceptance",
+  "chronology": "Added after the RF score was known; not a pre-method experiment",
+  "strategy": "most_frequent; majority selected using training labels only",
+  "predicted_class_id": 0,
+  "predicted_class_name": "normal",
+  "accuracy": 0.7233505739876371,
+  "correct_predictions": 17202,
+  "train_rows": 95120,
+  "test_rows": 23781,
+  "feature_count": 27,
+  "class_names": [
+    "normal",
+    "scan_A",
+    "scan_sU",
+    "sparta",
+    "mqtt_bruteforce"
+  ],
+  "class_counts": {
+    "train": {
+      "normal": 68806,
+      "scan_A": 1601,
+      "scan_sU": 1785,
+      "sparta": 11293,
+      "mqtt_bruteforce": 11635
+    },
+    "test": {
+      "normal": 17202,
+      "scan_A": 400,
+      "scan_sU": 447,
+      "sparta": 2823,
+      "mqtt_bruteforce": 2909
+    }
+  },
+  "classification_report": {
+    "normal": {
+      "precision": 0.7233505739876371,
+      "recall": 1.0,
+      "f1-score": 0.8394700241563575,
+      "support": 17202.0
+    },
+    "scan_A": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 400.0
+    },
+    "scan_sU": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 447.0
+    },
+    "sparta": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 2823.0
+    },
+    "mqtt_bruteforce": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 2909.0
+    },
+    "accuracy": 0.7233505739876371,
+    "macro avg": {
+      "precision": 0.14467011479752742,
+      "recall": 0.2,
+      "f1-score": 0.1678940048312715,
+      "support": 23781.0
+    },
+    "weighted avg": {
+      "precision": 0.5232360528882442,
+      "recall": 0.7233505739876371,
+      "f1-score": 0.6072311238189169,
+      "support": 23781.0
+    }
+  },
+  "confusion_matrix_rows_true_columns_predicted": [
+    [
+      17202,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      400,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      447,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2823,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2909,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "logical_array_sha256": {
+    "X_train": "fd8ecee4de2aeefc37994e2e580c689d860a2c47a9ef192e1b55e3d0303d8d97",
+    "X_test": "f746702354e050397a218f5cc8881d6d59afbfe64fccadf2a10c8523c8e84a30",
+    "y_train": "7746069491a61ad5ead92ba5b75b2dc8e8d06125dd1146f21b1873319d4d3a0a",
+    "y_test": "9869cbbdb8474b2699a67a1b2372e42ce73575ab78f2f6ffae2be01290992ebe",
+    "feature_names": "4a8e20d5937adcc6904fc57c4b53c9f98dd60a1b798e509a4c361595d1a58bfa",
+    "class_names": "6831149d3790ca4277860509de032fa13d4df9cf6d5a8e6742ab476746ef3483"
+  },
+  "source_preparation_commit": "7eae17cecdf6f49ee1c04c99a7a91b85a910dc38",
+  "source_verification_sha256": "09d87efd220f80d4cf8cb8cafc0b094ef1c36ee528fa7cb77b63463ee25ecd94",
+  "source_verification_url": "https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/blob/6f1f40fb335182ef122ceca578c2d11e07a6e1e9/results/data-verification.json",
+  "script_sha256": "11e66b58b9cd054b9b545aa8a25f0d7d53c757692955af48a40594e7e6ebd220",
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows",
+    "numpy": "2.5.2",
+    "scikit-learn": "1.9.0"
+  }
+}
