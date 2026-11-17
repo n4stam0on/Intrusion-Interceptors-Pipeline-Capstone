@@ -12,7 +12,7 @@ to skip independent review. The four-member team was already approved.
 | Rebuilt model with honest comparison | #45 records 99.941129%, 23,767/23,781 correct; #48 records evaluation tables | Merge #46 first, update #45, rerun final code, then reconcile #47/#48 |
 | Baseline before the paper method | Current Random Forest is called the baseline; port ablation exists | Identify and score a simple reference baseline; disclose chronology if added retrospectively |
 | Wiki reproduction report | Eight pages corrected November 13; dataset, method, comparison and limitations present | Final audit against merged code and selected explanation outputs |
-| Project board with written/sized stories | Assigned issues/sub-issues and milestone structure exist | Verify story points, statuses, evidence links and individual credit in the board; CLI cannot inspect due to missing read:project scope |
+| Project board with written/sized stories | Browser verified assigned issues/sub-issues; eight started parent stories moved to In Progress; numeric Story Points field added November 17 | Team agrees and fills estimates, confirms individual credit and evidence links; estimates remain blank |
 | Required GitHub collaborators | gdparra-edu is listed | Owner must add/verify cyberknowledge; it is absent from current collaborator listing |
 | Contribution table in README and on a slide | CONTRIBUTIONS.md and Wiki summary exist; #47 expands all four members' records | Add concise README table, use it on a slide, obtain individual confirmations |
 | 10–15 minute final presentation plus Q&A | #47 includes a proposed outline and speaking notes | Finished deck in repo, all four speakers, timed rehearsal and assigned Canvas slot |
@@ -79,6 +79,10 @@ rejects late final deliverables and states a missed scheduled presentation costs
 No recording, complete deck, rehearsal, Canvas submission, or successful
 independent teammate full-data check was found in the repository evidence audited.
 No unseen submission or offline work is assumed absent; the team should link it.
+
+The board's closed #11 was retired as redundant; its Done status is not evidence
+that the integrated clean-checkout run succeeded. Independent verification remains
+tracked under #39/#46. No issues were newly closed or created by this audit.
 
 ## Primary sources
 
