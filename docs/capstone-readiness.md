@@ -30,6 +30,10 @@ numerical closeness alone is not proof of exact reproduction.
 
 ## Kien's completed work
 
+See [Kien's completion status](kien-completion-status.md) for individual issue
+updates, the closed loading checkpoint, review dependencies and remaining human
+presentation obligations.
+
 - PR #5 approved/merged: dataset inventory, inspection, labels, checksums and
   259,379 raw rows with 32 columns per file.
 - PR #16 approved/merged: documented baseline cleaning, five-class construction,
