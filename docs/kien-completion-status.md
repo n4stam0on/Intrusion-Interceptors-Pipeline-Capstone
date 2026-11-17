@@ -11,7 +11,7 @@ claiming someone else's verification or approval.
 | 80/20 seed-42 stratified split | #23 implementation checkboxes complete; author-side counts/hashes/tests supplied | Independent #46 confirmation and merge; #23 remains open |
 | Dataset handoff and repeat builds | #31/#32 author-side checks complete; 95,120 train / 23,781 test / 27 features | Model/evaluation leads attest their own final-run hashes; teammate full-data verification pending |
 | Data documentation technical review | #39 current Wiki/report corrections complete | Final approval follows integrated-code consistency audit |
-| Data demo preparation | #40 commands, two-minute outline, text backup JSON ready | Actual screenshots/recording, readability and human timed rehearsal remain pending |
+| Data demo preparation | #40 commands, text backup JSON, editable five-slide section with two hidden backups and speaker notes, plus docs/kien-presentation-practice.md ready | Export/merge deck into team repository; actual screenshots/recording, display readability and human timed rehearsal remain pending |
 | Evaluation follow-up | #48 class-order/dashboard corrections and hash-verified train-majority reference (72.335057%, zero attack recall), commit 5f480fd | Review/integration; final RF/XAI evidence belongs to final merged run |
 | Reproduction report | Published Wiki report and supporting pages updated | Refresh after integration; presentation/Canvas evidence not yet attested |
 

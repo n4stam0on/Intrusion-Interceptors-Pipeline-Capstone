@@ -34,6 +34,8 @@ This document tracks individual contributions made by each member of the Intrusi
 
 | 11/17/26 | Completion tracking | Published the consolidated Wiki reproduction report and follow-up reference results; corrected #48 class mapping/dashboard and implemented the retrospective training-majority reference; audited assigned checkpoints, closed merged loading #21, updated evidence checkboxes, and reconciled six active Project items plus PR #46. Independent acceptance and human presentation gates remain pending. | Wiki commits a61bc65/bd74a3c; PR #48 commit 5f480fd; docs/kien-completion-status.md |
 
+| 11/17/26 | Presentation preparation | Prepared an editable dataset/preprocessing section with five main slides, two hidden backups, speaker notes, a timed practice script, short fallback, demo commands and Q&A. Actual rehearsal, team-deck integration and recording remain pending. | Issue #40; docs/kien-presentation-practice.md |
+
 ## Mia Gonzalez
 | Date | Time | Contribution | Related Issue/Commit | 
 |------|------|--------------|----------------------|
