@@ -12,6 +12,8 @@ This document tracks individual contributions made by each member of the Intrusi
 | 9/8/26 | 11:40 AM | Updated the main project README with the selected XMID-MQTT paper, MQTT-IoT-IDS2020 Bi-flow dataset, completed proposal, and then-current verification status. The numerical target was later corrected to 99.99% Random Forest Bi-flow, Table 2. | README update |
 | 11/13/26 | Documentation session | Audited main and PRs #45–#46, added verified dataset/access, environment, preprocessing-decision, methodology, and README documentation in five commits, opened PR #47, and synchronized eight Wiki pages with the correct paper/team result mapping. | [PR #47](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/47) / Issues #18, #19, #20, #29, #30, #37, #38 |
 
+| 11/17/26 | Documentation coordination | Recorded evidence and outcomes in #18/#19/#20/#29; corrected the setup-guide test block and documented the App Control blocker and separate synthetic/real-data verification steps. Independent testing remains pending. | [PR #47](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/47) |
+
 ## Kien Nguyen
 | Date | Time | Contribution | Related Issue/Commit |
 |------|------|--------------|----------------------|
@@ -22,12 +24,26 @@ This document tracks individual contributions made by each member of the Intrusi
 | 10/13/26 | 4:34 PM | Addressed PR #16 review: changed API/CLI defaults to 80/20, restored active binary-label validation, added regression tests, regenerated and verified X/y artifacts, and documented counts and remaining method decisions. | [PR #16](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/16) / [Issue #23](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/23) |
 | 10/13/26 | 4:34 PM | Resolved PR #5 conflicts against current main, preserved the coordinator's updated dataset documentation, and recorded the confirmed Random Forest Bi-flow 99.99% Table 2 target. | [PR #5](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/5) / [Issue #21](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/21) |
 
+| 11/5/26 | Data verification branch | Added training-only constant selection, six regression tests, two-run array/hash verification, constrained data dependencies, and model-handoff reports. Author-reported checks are recorded in the PR; independent successful verification is pending. | [PR #46](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/46) / head 76fe0b1cace7d494cc413245f18a48e4508098fe |
+
 ## Mia Gonzalez
 | Date | Time | Contribution | Related Issue/Commit |
 |------|------|--------------|----------------------|
-| Pending | Pending | No dated repository contribution has been recorded yet. Add evaluation and results work here with issue, commit, or PR evidence. | Evaluation and Results Lead |
+| 11/16/26 | Verification attempt | Independently checked out PR #46, installed dependencies, and attempted unit tests and a direct pandas import. Windows Application Control blocked DLL loading before project code ran. This is review effort, not successful verification. | [PR #46 evidence](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/46#issuecomment-6939465756) |
+| 11/16/26 | Evaluation branch | Added class-balance dashboard, evaluation plan, and baseline evaluation documentation. PR #48 is open and not yet independently accepted. Its baseline document identifies a missing saved labeled confusion matrix. | [PR #48](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/48) / Issues #24, #25, #26 / head 6c884a068badc57ebe3ab02197a688f8188e818e |
 
 ## Yassin Khodir
 | Date | Time | Contribution | Related Issue/Commit |
 |------|------|--------------|----------------------|
 | 11/13/26 | Model and evaluation branch | Implemented and evaluated the 100-tree Random Forest baseline, reproduced 99.9411% accuracy in a clean environment, generated SHAP/LIME outputs, tested port-feature sensitivity, and documented independent-traffic limitations. Work remains under review. | [PR #45](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/45) / Issues #7, #17, #27, #28, #31 |
+
+## Final audit — November 17, 2026
+
+Authorship and review are separate: a PR author’s saved results are not an independent teammate attestation. All four members have linked evidence above; open PR work is not labeled merged.
+
+- [ ] Each member verifies their own entry with a dated comment on #38.
+- [ ] Independent successful data/setup verification is attached to #46/#19.
+- [ ] Missing labeled confusion matrix is saved and linked by the model/evaluation owners.
+- [ ] Final presentation slides, speaking contributions, demo recording, and rehearsal evidence are linked.
+- [ ] Final merged PR/commit references replace provisional branch status where appropriate.
+- [ ] Contribution Summary Wiki is reconciled and the team approves the final record.
