@@ -10,7 +10,7 @@ to skip independent review. The four-member team was already approved.
 | Approved recent paper and precise claim | Proposal completed; XMID-MQTT (2025), Random Forest Bi-flow, Table 2, 99.99% | Preserve this exact mapping in final materials |
 | Repository reproducible from a clean checkout | Loading/preprocessing merged in #5/#16; six tests, real-data verifier, hashes, versions in #46 | Independent teammate full-data run and integrated main after review |
 | Rebuilt model with honest comparison | #45 records 99.941129%, 23,767/23,781 correct; #48 records evaluation tables | Merge #46 first, update #45, rerun final code, then reconcile #47/#48 |
-| Baseline before the paper method | Current Random Forest is called the baseline; port ablation exists | Identify and score a simple reference baseline; disclose chronology if added retrospectively |
+| Baseline before the paper method | #48 now includes a hash-verified training-majority reference: 72.335057%, macro F1 0.167894, zero attack recall | Added retrospectively November 17 after RF; review/integrate it and disclose chronology rather than claiming a before-method run |
 | Wiki reproduction report | Eight pages corrected November 13; dataset, method, comparison and limitations present | Final audit against merged code and selected explanation outputs |
 | Project board with written/sized stories | Browser verified assigned issues/sub-issues; eight started parent stories moved to In Progress; numeric Story Points field added November 17 | Team agrees and fills estimates, confirms individual credit and evidence links; estimates remain blank |
 | Required GitHub collaborators | gdparra-edu is listed | Owner must add/verify cyberknowledge; it is absent from current collaborator listing |
@@ -61,6 +61,10 @@ numerical closeness alone is not proof of exact reproduction.
 6. Model/evaluation owners verify SHAP/LIME sample provenance, final metrics and
    limitations. LIME is already implemented in #45; it needs review/integration,
    not a claim that it has not been written.
+   #48's class order is corrected in commit `5f480fd` to normal, scan_A, scan_sU,
+   sparta, mqtt_bruteforce. Its dashboard now distinguishes raw inventory from
+   the prepared split and no longer claims five-fold validation, balanced RF
+   weights, or no duplicate filtering. These corrections remain under review.
 7. Kien finishes official-source comparison or records a clearly accepted
    provenance limitation; confirms final array hashes with model/evaluation
    leads; rehearses the dataset section and prepares screenshots/video.
