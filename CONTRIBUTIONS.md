@@ -26,6 +26,8 @@ This document tracks individual contributions made by each member of the Intrusi
 | 10/13/26 | 4:34 PM | Addressed PR #16 review: changed API/CLI defaults to 80/20, restored active binary-label validation, added regression tests, regenerated and verified X/y artifacts, and documented counts and remaining method decisions. | [PR #16](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/16) / [Issue #23](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/23) |
 | 10/13/26 | 4:34 PM | Resolved PR #5 conflicts against current main, preserved the coordinator's updated dataset documentation, and recorded the confirmed Random Forest Bi-flow 99.99% Table 2 target. | [PR #5](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/5) / [Issue #21](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/21) |
 
+| 11/17/26 | — | Corrected #48 canonical class IDs and multiclass metric definitions; corrected/moved the raw-inventory dashboard; implemented and executed a retrospective train-majority reference against six hash-verified arrays, saved JSON/CSV evidence, and checked invalid class-order/hash rejection. Author-side work, not Mia's independent verification. | [PR #48](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/48) / `results/reference_baseline/README.md` |
+
 ## Mia Gonzalez
 | Date | Time | Contribution | Related Issue/Commit | 
 |------|------|--------------|----------------------|

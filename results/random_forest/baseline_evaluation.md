@@ -99,6 +99,11 @@ This value establishes the baseline for future paper-comparison analysis and sho
 
 ## Confusion Matrix Status
 
+The supplemental author-side matrix in #46's `results/model-handoff-verification.json`
+and the Wiki report is available for cross-checking; it is not a final integrated
+model export or successful independent review. Canonical class IDs are
+`0 normal, 1 scan_A, 2 scan_sU, 3 sparta, 4 mqtt_bruteforce`.
+
 Per-class precision, recall, F1-score, and support statistics were preserved in the baseline evaluation outputs. However, a labeled confusion matrix artifact was not found among the saved Random Forest result files.
 
 The confusion matrix should be regenerated from the original prediction outputs and stored as one of the following:
@@ -111,6 +116,15 @@ before final comparison and presentation activities.
 ---
 
 ## Results/Outcome
+
+### Separate simple reference (added November 17)
+
+The [training-majority reference](../reference_baseline/README.md), evaluated on
+the hash-matched prepared split, scores **72.335057% accuracy**, macro F1
+**0.167894**, and zero recall for all attacks. This experiment is explicitly
+retrospective, added after the RF run; it is not a before-method result.
+
+### Recorded Random Forest result
 
 The baseline Random Forest classifier achieved **99.9411% accuracy** on the approved MQTT-IoT-IDS2020 Bi-flow test set consisting of **23,781 records**. Macro and weighted F1-scores exceeded **0.9994**, indicating highly consistent performance across all five traffic classes.
 

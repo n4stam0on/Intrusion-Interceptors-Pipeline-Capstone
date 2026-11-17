@@ -33,7 +33,11 @@ Recall = TP / (TP \+ FN)
 
 F1\-Score = 2 × (Precision × Recall) / (Precision \+ Recall)
 
-Accuracy = (TP \+ TN) / (TP \+ TN \+ FP \+ FN)
+Multiclass accuracy = number of correct predictions / total predictions.
+
+For each class, TP/FP/FN/TN refer to that class versus all other classes.
+Recall is sensitivity; specificity = TN / (TN + FP). State how a zero
+denominator is handled. Macro/weighted averages must retain all five classes.
 
 ## Multiclass Averaging Method
 
@@ -50,13 +54,21 @@ Weighted averaging accounts for differences in class frequencies.
 
 The expected class order for all evaluations, reports, and confusion matrices is:
 
-1. normal
-2. sparta
-3. scan\_sU
-4. scan\_A
-5. mqtt\_bruteforce
+| Label ID | Class |
+|---:|---|
+| 0 | normal |
+| 1 | scan_A |
+| 2 | scan_sU |
+| 3 | sparta |
+| 4 | mqtt_bruteforce |
 
 This class order must remain consistent across all experiments.
+
+Read `class_names` from the prepared NPZ and preserve its ID mapping. Pass
+`labels=[0, 1, 2, 3, 4]` explicitly to metric/matrix functions. If display order
+changes, reorder both matrix axes and labels together; never relabel unchanged
+matrix values. This mapping agrees with preprocessing, #45's LIME configuration
+and #46's recorded handoff matrix. Corrected November 17, 2026.
 
 ## Confusion Matrix Format
 
@@ -103,15 +115,24 @@ Reported Accuracy: 99.99%
 
 This value will be used as the benchmark for reproduction comparison.
 
-## Class Order
-1. normal
-2. sparta
-3. scan_sU
-4. scan_A
-5. mqtt_bruteforce
+## Evidence status and reference baseline
+
+The canonical class mapping is defined once in the table above. PR #46's
+independent verification and the final integrated-model evaluation remain pending.
+
+A separate training-majority reference classifier is added retrospectively on
+November 17, after the RF score was known. It selects the most frequent label
+from training only and predicts it for every test record; it does not tune on
+test performance. See [reference-baseline evidence](reference_baseline/README.md).
+This improves comparison context but does not claim that the baseline was run
+before the paper method.
+
+The current experiment uses a stratified 80/20 holdout, not five-fold validation.
+The recorded RF does not use `class_weight='balanced'`. ROC-AUC and alternative
+weighting/cross-validation configurations are not measured by this PR.
 
 
-## Approval Summary
+## Plan Summary
 
 This evaluation plan establishes the standard procedure that will be used for all Random Forest baseline experiments and final comparisons against the published Table 2 accuracy target of 99.99%.
 

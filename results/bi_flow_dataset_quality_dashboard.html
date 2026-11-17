@@ -77,7 +77,7 @@
                     <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
                         Bi-Flow Dataset Analysis Report
                         <span class="px-2.5 py-0.5 text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full">
-                            Verified
+                            Recorded evidence
                         </span>
                     </h1>
                     <p class="text-xs text-gray-400">Data Quality Review & Class Balance Baseline Verification</p>
@@ -98,6 +98,18 @@
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-8">
+
+        <section class="bg-cyber-card border border-cyber-border rounded-xl p-5 text-sm text-gray-300">
+            <h2 class="font-bold text-white">Raw inventory and prepared split are different populations</h2>
+            <p>The charts below describe all 259,379 raw rows, including background normal traffic
+            repeated across scenario files. Scenario selection yields 157,009 rows; removing
+            38,108 duplicate model-feature records yields 118,901 unique records, split into
+            95,120 training and 23,781 test rows with 27 final features.</p>
+            <p class="mt-2">The actual held-out training-majority reference scores <strong>72.335057%</strong>
+            (17,202/23,781), not the raw inventory's 72.63% normal ratio. November 17 author-side
+            evidence is in <a href="reference_baseline/README.md" class="text-blue-400">reference_baseline/README.md</a>.
+            Independent #46 verification and final integrated results remain pending.</p>
+        </section>
 
         <!-- Notification Toast -->
         <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-emerald-600 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 pointer-events-none">
@@ -146,7 +158,7 @@
                 <div class="flex justify-between items-start">
                     <div>
                         <p class="text-xs font-semibold uppercase tracking-wider text-gray-400">Data Cleanliness</p>
-                        <h3 class="text-2xl font-bold text-emerald-400 mt-1">100.0%</h3>
+                        <h3 class="text-2xl font-bold text-emerald-400 mt-1">118,901 prepared</h3>
                     </div>
                     <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-lg border border-emerald-500/20">
                         <i class="fa-solid fa-check-double"></i>
@@ -154,7 +166,7 @@
                 </div>
                 <div class="mt-4 flex items-center text-xs text-emerald-400">
                     <i class="fa-solid fa-circle-check mr-1.5"></i>
-                    <span>0 Missing | 0 Duplicates | 0 Infs</span>
+                    <span>Retained features: 0 missing / infinite cells; 38,108 duplicates removed</span>
                 </div>
             </div>
 
@@ -294,7 +306,7 @@
                                 </div>
                             </td>
                             <td class="py-4 px-6 text-center">
-                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">100% Clean</span>
+                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">Inventoried</span>
                             </td>
                         </tr>
 
@@ -316,7 +328,7 @@
                                 </div>
                             </td>
                             <td class="py-4 px-6 text-center">
-                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">100% Clean</span>
+                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">Inventoried</span>
                             </td>
                         </tr>
 
@@ -338,7 +350,7 @@
                                 </div>
                             </td>
                             <td class="py-4 px-6 text-center">
-                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">100% Clean</span>
+                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">Inventoried</span>
                             </td>
                         </tr>
 
@@ -360,7 +372,7 @@
                                 </div>
                             </td>
                             <td class="py-4 px-6 text-center">
-                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">100% Clean</span>
+                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">Inventoried</span>
                             </td>
                         </tr>
 
@@ -382,7 +394,7 @@
                                 </div>
                             </td>
                             <td class="py-4 px-6 text-center">
-                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">100% Clean</span>
+                                <span class="px-2.5 py-1 text-[10px] font-sans font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">Inventoried</span>
                             </td>
                         </tr>
                     </tbody>
@@ -401,7 +413,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="py-4 px-6 text-center font-sans font-normal text-gray-400">0 Missing / 0 Dupes</td>
+                            <td class="py-4 px-6 text-center font-sans font-normal text-gray-400">Raw inventory; cleaning required</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -424,7 +436,7 @@
                     <ul class="mt-4 space-y-2 text-xs text-gray-400">
                         <li class="flex items-start">
                             <i class="fa-solid fa-angle-right text-amber-400 mt-0.5 mr-2"></i>
-                            <span>A naive dummy model predicting "Normal" would achieve <strong>72.63% accuracy</strong> without learning attack signatures.</span>
+                            <span>72.63% is a raw-inventory ratio. The evaluated training-majority model scores <strong>72.335057%</strong> on the prepared holdout and detects no attacks.</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fa-solid fa-angle-right text-amber-400 mt-0.5 mr-2"></i>
@@ -443,20 +455,20 @@
                         <h3 class="text-base font-bold text-white">Random Forest Training Strategy</h3>
                     </div>
                     <p class="text-xs text-gray-300 leading-relaxed">
-                        To build a robust baseline Random Forest classifier, implement the following experimental configurations in step 2:
+                        Recorded RF configuration. Cross-validation, balanced class weights and ROC-AUC are not measured by this experiment:
                     </p>
                     <div class="mt-4 space-y-2 text-xs">
                         <div class="p-2.5 bg-cyber-bg border border-cyber-border rounded-lg flex items-center justify-between">
                             <span class="text-gray-300 font-medium">Splitting Scheme</span>
-                            <span class="text-blue-400 font-mono">StratifiedKFold (k=5)</span>
+                            <span class="text-blue-400 font-mono">Stratified 80/20; seed 42</span>
                         </div>
                         <div class="p-2.5 bg-cyber-bg border border-cyber-border rounded-lg flex items-center justify-between">
                             <span class="text-gray-300 font-medium">Evaluation Metrics</span>
-                            <span class="text-blue-400 font-mono">Macro F1, Precision, Recall, ROC-AUC</span>
+                            <span class="text-blue-400 font-mono">Accuracy; macro/weighted precision, recall, F1</span>
                         </div>
                         <div class="p-2.5 bg-cyber-bg border border-cyber-border rounded-lg flex items-center justify-between">
                             <span class="text-gray-300 font-medium">Class Weighting</span>
-                            <span class="text-blue-400 font-mono">class_weight='balanced'</span>
+                            <span class="text-blue-400 font-mono">class_weight=None (default)</span>
                         </div>
                     </div>
                 </div>
@@ -487,9 +499,11 @@ Produce a verified summary of class balance and dataset quality prior to Random 
 
 ## Executive Summary & Data Quality Assessment
 - **Total Records Analyzed:** 259,379 bidirectional flow samples across 5 CSV files.
-- **Missing Values:** 0 null values across all 32 features.
-- **Duplicate Records:** 0 duplicate rows detected.
-- **Data Cleanliness:** 100% verified. No imputation or filtering required.
+- **Selected Rows:** 157,009 after scenario-label filtering.
+- **Duplicate Model-Feature Records Removed:** 38,108 before splitting.
+- **Prepared Data:** 118,901 unique rows; 95,120 train / 23,781 test; 27 features.
+- **Retained Feature Quality:** 0 missing cells and 0 infinite cells in the recorded verification.
+- **Status:** Author-side evidence; independent #46 check and final integration pending.
 
 ## Class Distribution Breakdown
 
@@ -500,13 +514,14 @@ Produce a verified summary of class balance and dataset quality prior to Random 
 | `biflow_scan_sU.csv` | 17,230 | 22,434 | 39,664 | 56.56% | Verified |
 | `biflow_scan_A.csv` | 5,786 | 19,907 | 25,693 | 77.48% | Verified |
 | `biflow_mqtt_bruteforce.csv` | 2,152 | 14,544 | 16,696 | 87.11% | Verified |
-| **Combined Total** | **188,378** | **71,001** | **259,379** | **27.37%** | **Clean** |
+| **Combined Total** | **188,378** | **71,001** | **259,379** | **27.37%** | **Raw inventory** |
 
 ## Key Observations & Recommendations
 1. **Class Ratio:** Aggregate distribution is 72.63% Normal vs 27.37% Attack (~3:1 ratio).
 2. **Imbalance Variance:** File-level attack rates vary significantly from 0.00% to 87.11%.
-3. **Splitting Strategy:** Must use `StratifiedKFold` cross-validation to maintain class proportions.
-4. **Primary Evaluation Metrics:** Precision, Recall, Macro F1-score, and ROC-AUC. Avoid raw accuracy as a single baseline performance metric.</code></pre>
+3. **Recorded Split:** Stratified 80/20 holdout, seed 42; five-fold validation was not run.
+4. **Recorded Metrics:** Accuracy, per-class precision/recall/F1, macro and weighted averages. ROC-AUC was not measured.
+5. **Reference:** Train-majority classifier scores 72.335057% on the prepared holdout, with zero attack recall. Added retrospectively after RF; no class weighting used.</code></pre>
             </div>
         </section>
 
