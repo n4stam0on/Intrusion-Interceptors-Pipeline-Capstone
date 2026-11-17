@@ -26,6 +26,16 @@ This document tracks individual contributions made by each member of the Intrusi
 | 10/13/26 | 4:34 PM | Addressed PR #16 review: changed API/CLI defaults to 80/20, restored active binary-label validation, added regression tests, regenerated and verified X/y artifacts, and documented counts and remaining method decisions. | [PR #16](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/16) / [Issue #23](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/23) |
 | 10/13/26 | 4:34 PM | Resolved PR #5 conflicts against current main, preserved the coordinator's updated dataset documentation, and recorded the confirmed Random Forest Bi-flow 99.99% Table 2 target. | [PR #5](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/5) / [Issue #21](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/issues/21) |
 
+| 11/5/26 | Verification session | Reviewed Kien's notebook checkpoints and Wiki, added a two-run data verifier and demonstration guide, fixed constant-feature selection to use training data only, tested six regressions, and reproduced PR #45's baseline accuracy with identified data arrays. Recorded environment drift and supplied data-path package constraints. | Issues #21, #23, #31, #32, #39, #40; verification branch |
+
+| 11/17/26 | Verification support | Added a browser-runnable reviewer notebook to PR #46 for the Windows pandas App Control blocker; it records exact commit, six tests, verified real-data counts, environment, and a downloadable evidence ZIP. Re-reviewed the corrected Wiki and documented the required #46-before-#45 merge order. Author-side checks are distinct from teammate attestation. | PR #46; Issues #23, #32, #39 |
+
+| 11/17/26 | Course audit | Compared the live course hub and presentation rubric against main, four open PRs, issues and corrected Wiki; documented completed versus pending work, integration order and final-delivery requirements in docs/capstone-readiness.md, with evidence-backed tracking updates. | PR #46; shared capstone issues |
+
+| 11/17/26 | Completion tracking | Published the consolidated Wiki reproduction report and follow-up reference results; corrected #48 class mapping/dashboard and implemented the retrospective training-majority reference; audited assigned checkpoints, closed merged loading #21, updated evidence checkboxes, and reconciled six active Project items plus PR #46. Independent acceptance and human presentation gates remain pending. | Wiki commits a61bc65/bd74a3c; PR #48 commit 5f480fd; docs/kien-completion-status.md |
+
+| 11/17/26 | Presentation preparation | Prepared an editable dataset/preprocessing section with five main slides, two hidden backups, speaker notes, a timed practice script, short fallback, demo commands and Q&A. Actual rehearsal, team-deck integration and recording remain pending. | Issue #40; docs/kien-presentation-practice.md |
+
 ## Mia Gonzalez
 | Date | Time | Contribution | Related Issue/Commit | 
 |------|------|--------------|----------------------|

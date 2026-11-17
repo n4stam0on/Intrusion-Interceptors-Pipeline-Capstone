@@ -35,10 +35,11 @@ The script performs the following checks and transformations in order:
 7. Removes exact duplicate feature vectors within each class before splitting,
    preventing identical examples from appearing in both train and test data.
 8. Rejects any identical feature vector that has conflicting class labels.
-9. Drops zero-variance features by default. In the current replication,
+9. Creates a reproducible 80/20 stratified split with random seed 42.
+10. Detects zero-variance features using training data only and drops the same
+   columns from both partitions by default. In the current replication,
    `bwd_num_urg_flags` is always zero. Use `--keep-constant-features` only when a
    strict 28-feature comparison is required.
-10. Creates a reproducible 80/20 stratified split with random seed 42.
 
 No category encoding is needed after identifiers are removed: all retained
 features are numeric. No scaling is applied because Random Forest decisions are

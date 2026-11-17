@@ -105,6 +105,23 @@ class PreprocessingTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "Schema mismatch"):
                 prepare_dataset(input_dir, test_size=0.4)
 
+    def test_constant_selection_does_not_use_holdout_values(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            input_dir = Path(temporary)
+            self.create_fixture(input_dir)
+            _, held_out, _, _, _ = prepare_dataset(input_dir, test_size=0.4)
+            held_out_port = held_out.iloc[0]["prt_src"]
+            for scenario in SCENARIOS:
+                path = input_dir / scenario.filename
+                frame = pd.read_csv(path)
+                frame["fwd_num_urg_flags"] = 0
+                frame.loc[frame["prt_src"].eq(held_out_port), "fwd_num_urg_flags"] = 1
+                frame.to_csv(path, index=False)
+            X_train, X_test, _, _, metadata = prepare_dataset(input_dir, test_size=0.4)
+            self.assertIn("fwd_num_urg_flags", metadata["constant_features_detected"])
+            self.assertNotIn("fwd_num_urg_flags", X_train.columns)
+            self.assertNotIn("fwd_num_urg_flags", X_test.columns)
+
     def test_invalid_labels_are_rejected_before_filtering(self) -> None:
         for value in (2, -1, "attack", np.nan):
             with self.subTest(label=value), tempfile.TemporaryDirectory() as temporary:
