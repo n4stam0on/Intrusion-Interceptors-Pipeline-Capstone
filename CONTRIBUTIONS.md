@@ -30,6 +30,8 @@ This document tracks individual contributions made by each member of the Intrusi
 
 | 11/17/26 | Verification support | Added a browser-runnable reviewer notebook to PR #46 for the Windows pandas App Control blocker; it records exact commit, six tests, verified real-data counts, environment, and a downloadable evidence ZIP. Re-reviewed the corrected Wiki and documented the required #46-before-#45 merge order. Author-side checks are distinct from teammate attestation. | PR #46; Issues #23, #32, #39 |
 
+| 11/17/26 | Course audit | Compared the live course hub and presentation rubric against main, four open PRs, issues and corrected Wiki; documented completed versus pending work, integration order and final-delivery requirements in docs/capstone-readiness.md, with evidence-backed tracking updates. | PR #46; shared capstone issues |
+
 ## Mia Gonzalez
 | Date | Time | Contribution | Related Issue/Commit | 
 |------|------|--------------|----------------------|

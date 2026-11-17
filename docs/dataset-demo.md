@@ -2,6 +2,9 @@
 
 Owner: Kien Nguyen. Supports #21, #23, #31, #32, #39, and #40.
 
+See [capstone readiness](capstone-readiness.md) for the course-requirement audit,
+completed contributions, integration order, and remaining final-delivery gates.
+
 ## Fresh checkout on Windows (PowerShell)
 
 Use Python 3.12. The five CSV files must be obtained separately using the source
