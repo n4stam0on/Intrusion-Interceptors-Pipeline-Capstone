@@ -83,10 +83,27 @@ The paper comparison is 99.99% for Random Forest Bi-flow in Table 2. The current
 
 ## 7. Run tests
 
-```powershellpython -m unittest discover -s tests -v
+```powershell
+python -m unittest discover -s tests -v
 ```
 
 If a command is unavailable, first confirm that the branch or PR containing it is checked out. If imports fail, confirm the virtual environment is active and rerun dependency installation.
+
+## Known environment blocker
+
+Mia attempted independent verification with Python 3.11.9 on November 16, 2026. Windows Application Control blocked a DLL during pandas initialization; a direct pandas import reproduced the error before project tests ran. This is a blocked attempt, not a passing test or proof of a project-code defect. Do not disable or bypass Application Control. Use an authorized environment or consult the device administrator.
+
+Evidence: [PR #46 verification attempt](https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/pull/46#issuecomment-6939465756).
+
+For PR #46’s constrained data baseline, follow its Python 3.12 setup in `docs/dataset-demo.md` and install with `python -m pip install -r Requirements.txt -c requirements-data-verification.txt`. The Python 3.11 model environment and Python 3.12 data environment are separately recorded; compare logical hashes rather than assuming identical outputs.
+
+The unit tests use synthetic fixtures and do not verify real-dataset counts. On PR #46’s branch, with the five actual CSVs present, also run:
+
+```powershell
+python src/verify_prepared_data.py --input-dir data/raw/kaggle-replication --report results/independent-data-verification.json
+```
+
+Record the six passing tests, expected dimensions, Python/package versions, generated report, and logical-hash comparison with the baseline. Keep raw datasets outside Git.
 
 ## Clean-checkout evidence for issue #19
 
