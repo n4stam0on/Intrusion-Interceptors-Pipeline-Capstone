@@ -28,6 +28,8 @@ This document tracks individual contributions made by each member of the Intrusi
 
 | 11/5/26 | Verification session | Reviewed Kien's notebook checkpoints and Wiki, added a two-run data verifier and demonstration guide, fixed constant-feature selection to use training data only, tested six regressions, and reproduced PR #45's baseline accuracy with identified data arrays. Recorded environment drift and supplied data-path package constraints. | Issues #21, #23, #31, #32, #39, #40; verification branch |
 
+| 11/17/26 | Verification support | Added a browser-runnable reviewer notebook to PR #46 for the Windows pandas App Control blocker; it records exact commit, six tests, verified real-data counts, environment, and a downloadable evidence ZIP. Re-reviewed the corrected Wiki and documented the required #46-before-#45 merge order. Author-side checks are distinct from teammate attestation. | PR #46; Issues #23, #32, #39 |
+
 ## Mia Gonzalez
 | Date | Time | Contribution | Related Issue/Commit | 
 |------|------|--------------|----------------------|

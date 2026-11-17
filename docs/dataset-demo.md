@@ -9,7 +9,35 @@ information in `data/README.md` and checked against `docs/dataset-verification.m
 The current `Requirements.txt` is unpinned; the additional data constraints fix
 the three packages that control parsing and splitting. Reports record the
 versions actually tested. This command sequence is supplied for #19,
-whose coordinator-owned setup guide is still pending.
+The coordinator's setup guide is now in PR #47; consult that guide for the
+separately tested Python 3.11 model environment and its App Control notes.
+
+## Independent verification when Windows blocks pandas
+
+Mia's November 16 attempt failed during a direct pandas import because Windows
+Application Control blocked a DLL. It did not execute the project tests. Use
+an authorized separate machine/runtime or have the device administrator resolve
+the policy issue. Do not disable or bypass device protections.
+
+[Open the reviewer notebook in Google Colab](https://colab.research.google.com/github/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone/blob/mvpmvp/final-data-verification/notebooks/verify_pr46_colab.ipynb).
+Enter the actual reviewer's name and run all cells. The notebook checks out the
+current PR head by exact commit, runs six tests, downloads the team-provided
+public Kaggle replication, validates file hashes and the real-data counts,
+rebuilds twice, and downloads a small evidence ZIP. If Kaggle access is denied,
+report that failure; it is not a pass and should not be worked around with an
+unverified dataset. The remote environment's Python/package versions and any
+baseline hash differences are recorded explicitly.
+
+The reviewer should attach the evidence to #46 and state whether all six tests
+passed and the output was 95,120 training rows, 23,781 test rows, and 27 features.
+Author/AI execution is supplementary evidence and does not fulfill the requested
+independent teammate check. Formal approval/merge belongs to the reviewer.
+
+Merge order: approve and merge #46 after independent verification; then update
+#45 from the merged main, preserve training-only constant selection, and rerun
+the model (expected approximately 99.9411%). Do not merge #45 first.
+
+## Local commands
 
 ```powershell
 git clone https://github.com/n4stam0on/Intrusion-Interceptors-Pipeline-Capstone.git
@@ -71,14 +99,16 @@ For the model's default input path, run:
    and clearly say it is saved output. A full clean-checkout video is still
    required for the final presentation.
 
-## Method decisions still awaiting sign-off
+## Documented method decisions
 
 The paper describes IP label encoding and Min-Max scaling. The approved merged
 baseline excludes IP fields and uses numeric features without scaling. Seed 42,
 stratification, duplicate removal, protocol removal, and constant-feature removal
 are team decisions. The 80/20 ratio is specified in Section 4 of XMID-MQTT.
-Record final acceptance or add a separate paper-aligned configuration under
-#20/#22; do not describe this baseline as an exact reproduction of all methods.
+The November 13 Wiki update explicitly records these choices as the approved
+baseline and labels IP handling/scaling as deviations. A separate paper-aligned
+experiment would be additional work; do not describe this baseline as an exact
+reproduction of all preprocessing methods.
 
 ## Wiki review (November 5, 2026)
 
@@ -90,6 +120,17 @@ with 99.16%; correct it to 99.99% in Table 2, record the 80/20 split, seed 42,
 27 features, class mapping, and the deviations above. Final documentation
 approval remains pending these corrections. This review supports #39 without
 claiming the Wiki is already accurate.
+
+### November 17 follow-up
+
+Re-reviewed Wiki commit `0fc1deada86715b0451d4109d7c4967fff021a74`.
+The dataset inventory, 80/20 ratio, seed, 27-feature count, Table 2 target,
+and IP/scaling deviations have now been corrected. The method page correctly
+describes training-only constant selection as work under review in #46.
+PR #47 supplies the coordinator's setup/method guide. The earlier November 5
+findings above are historical, not a claim that those corrections remain undone.
+Final consistency review should still follow integration of #46, then #45,
+and the documentation/evaluation PRs.
 
 ## Environment comparison
 
